@@ -5,7 +5,8 @@ CREATE TABLE books(
 	title VARCHAR(50) NOT NULL,
 	rating INTEGER,
 	review TEXT,
-	date_read DATE NOT NULL
+	date_read DATE NOT NULL,
+	ISBN INTEGER
 );
 
 CREATE TABLE notes(
