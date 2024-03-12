@@ -5,10 +5,14 @@ import bodyParser from "body-parser";
 const app = express();
 const port = 3000;
 
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
-app.use(bodyParser.urlencoded({ extended: false }));
-app.set("view engine", "ejs");
 
-app.listen((req, res) => {
+app.get('/', (req, res)=>{
+    res.render('index.ejs');
+});
+
+app.listen(port, () => {
   console.log("Server is running on port " + port + ".");
+  console.log('http://localhost:3000');
 });
