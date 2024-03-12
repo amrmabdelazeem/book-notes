@@ -1,0 +1,61 @@
+//Variables
+$primary-color: #080;
+$secondary-color: #88f;
+$parahraph-color: #ccc;
+$rating-color: #666;
+
+*{
+    box-sizing: border-box;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+html{
+    background-color: black;
+}
+body{
+    max-width: 800px;
+    margin: 0 auto;
+}
+main{
+    :is(h1, h2){
+        color: $primary-color;
+    }
+
+    h1{
+        font-size: 3rem;
+        margin-top: 0;
+    }
+    h2{
+        font-size: 2rem;
+        letter-spacing: 3px;
+    }
+    p{
+        font-size: 1.5rem;
+        color: $parahraph-color;
+    }
+}
+
+.book{
+    border-top: 2px solid #ccc;
+    padding-top: 2rem;
+    padding-bottom: 6rem;
+    img{
+        width: 150px;
+        height: auto;
+        float: left;
+        margin-right: 2rem;
+    }
+
+    h3{
+        margin-top: 0;
+        font-size: 2rem;
+        color: $secondary-color ;
+    }
+    small{
+        color: $rating-color;
+        font-size: 1rem;
+    }
+
+    .notes{
+        font-size: 2rem;
+    }
+}

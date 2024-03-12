@@ -1,3 +1,55 @@
+* {
+  box-sizing: border-box;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
 
+html {
+  background-color: black;
+}
+
+body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+main :is(h1, h2) {
+  color: #080;
+}
+main h1 {
+  font-size: 3rem;
+  margin-top: 0;
+}
+main h2 {
+  font-size: 2rem;
+  letter-spacing: 3px;
+}
+main p {
+  font-size: 1.5rem;
+  color: #ccc;
+}
+
+.book {
+  border-top: 2px solid #ccc;
+  padding-top: 2rem;
+  padding-bottom: 6rem;
+}
+.book img {
+  width: 150px;
+  height: auto;
+  float: left;
+  margin-right: 2rem;
+}
+.book h3 {
+  margin-top: 0;
+  font-size: 2rem;
+  color: #88f;
+}
+.book small {
+  color: #666;
+  font-size: 1rem;
+}
+.book .notes {
+  font-size: 2rem;
+}
 
 /*# sourceMappingURL=style.css.map */
