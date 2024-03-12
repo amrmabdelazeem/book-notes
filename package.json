@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A website with books I've read that contains personal reviews, ratings, date read and books covers.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
