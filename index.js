@@ -18,6 +18,45 @@ const port = 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
+function shortenBookTitle(title) {
+  // Split the title into an array of words
+  const words = title.split(' ');
+  // Define a list of definite and indefinite articles and other words to filter
+    const filterWords = ['the', 'a', 'an', 'by', 'can', 'could', 'may', 'might', 'must', 'shall', 'should', 'will', 'would', 'I', 'you', 'he', 'she', 'it', 'we', 'they', 'me', 'him', 'her', 'us', 'them'];
+
+  const hyphenIndex = words.indexOf('-');
+
+  // Filter out articles and other specified words from the array of words before the "-" character
+  let filteredWords;
+  if (hyphenIndex !== -1) {
+      filteredWords = words.slice(0, hyphenIndex).filter(word => !filterWords.includes(word.toLowerCase()));
+  } else {
+      filteredWords = words.filter(word => !filterWords.includes(word.toLowerCase()));
+  }
+
+  // Check for - in the first word after filtering
+  for (let i = 0; i < filteredWords.length; i++) {
+    const filteredWord = filteredWords[i];
+    if (filteredWord.includes('-')) {
+        const hyphenIndex = filteredWord.indexOf('-');
+        // Check if the hyphen has no spaces around it
+        if (hyphenIndex > 0 && hyphenIndex < filteredWord.length - 1 && filteredWord[hyphenIndex - 1] !== ' ' && filteredWord[hyphenIndex + 1] !== ' ') {
+            // If it has no spaces around it, remove the hyphen
+            filteredWords[i] = filteredWord.replace('-', '');
+        }
+    }
+}
+  // Capitalize the first letter of each word and join the words back together
+  const shortenedTitle = filteredWords.map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('');
+  
+  return shortenedTitle;
+}
+
+// const originalTitle = "E-Myth Revisited - by Michael Gerber";
+// const shortenedTitle = shortenBookTitle(originalTitle);
+
+// console.log(shortenedTitle);
+
 let books = [
   {
     id: 1,
