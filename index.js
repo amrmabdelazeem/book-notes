@@ -5,15 +5,15 @@ import "dotenv/config";
 
 const app = express();
 const port = 3000;
-const db = new pg.Client({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  database: process.env.DB_DATABASE,
-  password: process.env.DB_PASSWORD,
-});
+// const db = new pg.Client({
+//   user: process.env.DB_USER,
+//   host: process.env.DB_HOST,
+//   port: process.env.DB_PORT,
+//   database: process.env.DB_DATABASE,
+//   password: process.env.DB_PASSWORD,
+// });
 
-db.connect();
+// db.connect();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -39,11 +39,32 @@ let books = [
   },
 ];
 
+let notes = [
+  {
+    id: 1,
+    book_id: 1,
+    note_description:
+      "I was within and without, simultaneously enchanted and repelled by the inexhaustible variety of life.",
+  },
+  {
+    id: 2,
+    book_id: 1,
+    note_description:
+      "He smiled understandingly-much more than understandingly. It was one of those rare smiles with a quality of eternal reassurance in it, that you may come across four or five times in life. It faced--or seemed to face--the whole eternal world for an instant, and then concentrated on you with an irresistible prejudice in your favor. It understood you just as far as you wanted to be understood, believed in you as you would like to believe in yourself, and assured you that it had precisely the impression of you that, at your best, you hoped to convey.",
+  },
+  {
+    id: 3,
+    book_id: 2,
+    note_description:
+      "Now I will tell you the answer to my question. It is this. The Party seeks power entirely for its own sake. We are not interested in the good of others; we are interested solely in power, pure power. What pure power means you will understand presently. We are different from the oligarchies of the past in that we know what we are doing. All the others, even those who resembled ourselves, were cowards and hypocrites. The German Nazis and the Russian Communists came very close to us in their methods, but they never had the courage to recognize their own motives.",
+  },
+];
+
 app.get("/", (req, res) => {
-  res.render("index.ejs", { books });
+  res.render("index.ejs", { books, notes });
 });
 
-db.end();
+// db.end();
 
 app.listen(port, () => {
   console.log("Server is running on port " + port + ".");
