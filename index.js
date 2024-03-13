@@ -39,11 +39,8 @@ function shortenBookTitle(title) {
     const filteredWord = filteredWords[i];
     if (filteredWord.includes('-')) {
         const hyphenIndex = filteredWord.indexOf('-');
-        // Check if the hyphen has no spaces around it
-        if (hyphenIndex > 0 && hyphenIndex < filteredWord.length - 1 && filteredWord[hyphenIndex - 1] !== ' ' && filteredWord[hyphenIndex + 1] !== ' ') {
-            // If it has no spaces around it, remove the hyphen
-            filteredWords[i] = filteredWord.replace('-', '');
-        }
+        
+        filteredWords[i] = filteredWord.replace('-', '');
     }
 }
   // Capitalize the first letter of each word and join the words back together
