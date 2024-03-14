@@ -5,15 +5,15 @@ import "dotenv/config";
 
 const app = express();
 const port = 3000;
-// const db = new pg.Client({
-//   user: process.env.DB_USER,
-//   host: process.env.DB_HOST,
-//   port: process.env.DB_PORT,
-//   database: process.env.DB_DATABASE,
-//   password: process.env.DB_PASSWORD,
-// });
+const db = new pg.Client({
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  database: process.env.DB_DATABASE,
+  password: process.env.DB_PASSWORD,
+});
 
-// db.connect();
+db.connect();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -96,8 +96,19 @@ let notes = [
   },
 ];
 
-app.get("/", (req, res) => {
-  res.render("index.ejs", { books, notes });
+app.get("/", async(req, res) => {
+  try {
+    const result = await db.query('SELECT * FROM books ORDER BY id ASC');
+    books = result.rows;
+    res.render("index.ejs", { books, notes });
+  } catch (error) {
+    console.log(error);
+  }
+
+});
+
+app.get("/notes", (req, res)=>{
+  res.render("notes.ejs");
 });
 
 // db.end();
