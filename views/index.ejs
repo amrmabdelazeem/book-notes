@@ -8,16 +8,18 @@
 </p>
 <br />
 <section class="book">
-  <img src="./images/book-cover.webp" alt="Book cover" />
-  <h2>
-    <a href="notes.ejs"> <%= book.title %> </a>
-  </h2>
-  <small
-    >Date read: <%= book.date_read %>. How strongly I recommend it:
-    <strong><%= book.rating %></strong>/10
-  </small>
-  <p><%=book.review%></p>
-  <a class="notes" href="">Read my Notes</a>
+  <form action="" method="post">
+    <img src="./images/book-cover.webp" alt="Book cover" />
+    <h2>
+      <a href=""> <%= book.title %> </a>
+    </h2>
+    <small
+      >Date read: <%= book.date_read %>. How strongly I recommend it:
+      <strong><%= book.rating %></strong>/10
+    </small>
+    <p><%=book.review%></p>
+    <a class="notes" href="">Read my Notes</a>
+  </form>
 </section>
 <%}); %> <%} else{ %>
 <h1>No books found.</h1>
