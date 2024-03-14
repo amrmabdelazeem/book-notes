@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: "Valkyrie C4";
 }
 
 html {
@@ -14,14 +14,24 @@ body {
 
 main :is(h1, h2) {
   color: #080;
+  letter-spacing: 2px;
+}
+main header {
+  font-size: 3rem;
+  color: #080;
+  margin: 2rem 0;
 }
 main h1 {
-  font-size: 3rem;
+  font-size: 2.5rem;
   margin-top: 0;
 }
 main h2 {
   font-size: 2rem;
   letter-spacing: 3px;
+}
+main h3 {
+  letter-spacing: 3px;
+  margin-top: 0;
 }
 main p {
   font-size: 1.5rem;
@@ -35,12 +45,12 @@ main p {
 }
 .book img {
   width: 150px;
-  height: auto;
+  height: 250px;
   float: left;
   margin-right: 2rem;
+  background-color: #ccc;
 }
 .book h3 {
-  margin-top: 0;
   font-size: 2rem;
   color: #88f;
 }
@@ -49,6 +59,36 @@ main p {
   font-size: 1rem;
 }
 .book .notes {
+  font-size: 2rem;
+}
+
+#notes {
+  text-transform: uppercase;
+}
+#notes img {
+  width: 150px;
+  height: auto;
+  float: left;
+  margin-right: 2rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+#notes h3 {
+  font-size: 2.5rem;
+  color: #080;
+}
+#notes small {
+  color: #666;
+  font-size: 1rem;
+  line-height: 30px;
+}
+#notes strong {
+  color: #666;
+}
+#notes strong a {
+  color: #8888ff;
+}
+#notes .notes {
   font-size: 2rem;
 }
 

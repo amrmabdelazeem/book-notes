@@ -4,58 +4,100 @@ $secondary-color: #88f;
 $parahraph-color: #ccc;
 $rating-color: #666;
 
-*{
-    box-sizing: border-box;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-}
-html{
-    background-color: black;
-}
-body{
-    max-width: 800px;
-    margin: 0 auto;
-}
-main{
-    :is(h1, h2){
-        color: $primary-color;
-    }
+* {
+  box-sizing: border-box;
+  font-family: "Valkyrie C4";
 
-    h1{
-        font-size: 3rem;
-        margin-top: 0;
-    }
-    h2{
-        font-size: 2rem;
-        letter-spacing: 3px;
-    }
-    p{
-        font-size: 1.5rem;
-        color: $parahraph-color;
-    }
+}
+html {
+  background-color: black;
+}
+body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+main {
+  :is(h1, h2) {
+    color: $primary-color;
+    letter-spacing: 2px;
+  }
+  header{
+    font-size: 3rem;
+    color: #080;
+    margin: 2rem 0;
+  }
+  h1 {
+    font-size: 2.5rem;
+    margin-top: 0;
+  }
+  h2 {
+    font-size: 2rem;
+    letter-spacing: 3px;
+  }
+  h3 {
+    letter-spacing: 3px;
+    margin-top: 0;
+  }
+  p {
+    font-size: 1.5rem;
+    color: $parahraph-color;
+  }
 }
 
-.book{
-    border-top: 2px solid #ccc;
-    padding-top: 2rem;
-    padding-bottom: 6rem;
-    img{
-        width: 150px;
-        height: auto;
-        float: left;
-        margin-right: 2rem;
-    }
+.book {
+  border-top: 2px solid #ccc;
+  padding-top: 2rem;
+  padding-bottom: 6rem;
+  img {
+    width: 150px;
+    height: 250px;
+    float: left;
+    margin-right: 2rem;
+    background-color: #ccc;
+  }
 
-    h3{
-        margin-top: 0;
-        font-size: 2rem;
-        color: $secondary-color ;
-    }
-    small{
-        color: $rating-color;
-        font-size: 1rem;
-    }
+  h3 {
+    font-size: 2rem;
+    color: $secondary-color;
+  }
+  small {
+    color: $rating-color;
+    font-size: 1rem;
+  }
 
-    .notes{
-        font-size: 2rem;
+  .notes {
+    font-size: 2rem;
+  }
+}
+
+#notes {
+  text-transform: uppercase;
+  img {
+    width: 150px;
+    height: auto;
+    float: left;
+    margin-right: 2rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  h3 {
+    font-size: 2.5rem;
+    color: $primary-color;
+  }
+  small {
+    color: $rating-color;
+    font-size: 1rem;
+    line-height: 30px;
+  }
+  strong {
+    color: $rating-color;
+
+    a{
+        color: adjust-color($color: $secondary-color, $alpha: 1.0)
     }
+  }
+
+  .notes {
+    font-size: 2rem;
+  }
 }
