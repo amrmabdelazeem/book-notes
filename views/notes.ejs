@@ -14,10 +14,7 @@
   </p>
   <h2>My Notes</h2>
   <% notes.forEach(note => { %>
-  <p>
-    <%= note.note_description %>
-  </p>
-  <%}); %>
-  <% } %>
+  <p><%=note.note_description%></p>
+  <%}); %> <% } %>
 </section>
 <%- include('partials/footer') %>
