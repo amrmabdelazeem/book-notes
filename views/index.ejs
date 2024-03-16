@@ -8,11 +8,13 @@
 </p>
 <br />
 <section class="book">
-  <form action="" method="post">
-    <img src="./images/book-cover.webp" alt="Book cover" />
+  <form action="/edit" method="post">
+    <img src="<%=imageData%>" alt="Book cover" />
     <h2>
-      <a href=""> <%= book.title %> </a>
+      <a href="" name="title" value="<%=book.title%>"> <%= book.title %> </a>
     </h2>
+    <input type="hidden" name="id" value="<%=book.id%>">
+    <button type="submit">Submit</button>
     <small
       >Date read: <%= book.date_read %>. How strongly I recommend it:
       <strong><%= book.rating %></strong>/10
