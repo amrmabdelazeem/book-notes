@@ -2,9 +2,12 @@ import express from "express";
 import pg from "pg";
 import bodyParser from "body-parser";
 import "dotenv/config";
+import axios from "axios";
 
 const app = express();
 const port = 3000;
+// const apiURL = process.env.API_URL;
+
 const db = new pg.Client({
   user: process.env.DB_USER,
   host: process.env.DB_HOST,
@@ -96,19 +99,38 @@ let notes = [
   },
 ];
 
+//https://covers.openlibrary.org/b/$key/$value-$size.jpg 
 app.get("/", async(req, res) => {
   try {
     const result = await db.query('SELECT * FROM books ORDER BY id ASC');
     books = result.rows;
-    res.render("index.ejs", { books, notes });
+
+
+    // const response = await axios.get(apiURL+'isbn/'+books.isbn+'-M.jpg');
+    
+    // let imageData = response.request.res.responseUrl;
+    let imageData = 'null';
+    
+    res.render("index.ejs", { books, notes, imageData });
   } catch (error) {
     console.log(error);
   }
 
 });
 
-app.get("/notes", (req, res)=>{
-  res.render("notes.ejs");
+// app.get("/notes", (req, res)=>{
+//   res.render("notes.ejs");
+// });
+
+app.post("/edit", async (req, res)=>{
+  const currentBookId = req.body.id;
+  const result = await db.query('SELECT * FROM books INNER JOIN notes on books.id = notes.book_id where books.id = $1',[currentBookId]);
+  notes = result.rows;
+  const pBooksResult = await db.query('SELECT * FROM books where books.id = $1',[currentBookId]);
+  const selectedBook = pBooksResult.rows[0];
+  console.log(selectedBook);
+  // console.log(notes);
+  res.render("notes.ejs",{notes, selectedBook});
 });
 
 // db.end();
