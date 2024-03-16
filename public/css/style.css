@@ -4,7 +4,7 @@
 }
 
 html {
-  background-color: black;
+  background-color: #0C2D57;
 }
 
 body {
@@ -13,7 +13,7 @@ body {
 }
 
 main :is(h1, h2) {
-  color: #080;
+  color: #FFB0B0;
   letter-spacing: 2px;
 }
 main header {
@@ -52,10 +52,10 @@ main p {
 }
 .book h3 {
   font-size: 2rem;
-  color: #88f;
+  color: #FC6736;
 }
 .book small {
-  color: #666;
+  color: #EFECEC;
   font-size: 1rem;
 }
 .book .notes {
@@ -75,18 +75,18 @@ main p {
 }
 #notes h3 {
   font-size: 2.5rem;
-  color: #080;
+  color: #FFB0B0;
 }
 #notes small {
-  color: #666;
+  color: #EFECEC;
   font-size: 1rem;
   line-height: 30px;
 }
 #notes strong {
-  color: #666;
+  color: #EFECEC;
 }
 #notes strong a {
-  color: #8888ff;
+  color: #fc6736;
 }
 #notes .notes {
   font-size: 2rem;

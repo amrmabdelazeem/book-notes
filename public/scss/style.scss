@@ -1,8 +1,8 @@
 //Variables
-$primary-color: #080;
-$secondary-color: #88f;
+$primary-color: #FFB0B0;
+$secondary-color: #FC6736;
 $parahraph-color: #ccc;
-$rating-color: #666;
+$rating-color: #EFECEC;
 
 * {
   box-sizing: border-box;
@@ -10,7 +10,7 @@ $rating-color: #666;
 
 }
 html {
-  background-color: black;
+  background-color: #0C2D57;
 }
 body {
   max-width: 800px;
@@ -48,6 +48,7 @@ main {
   border-top: 2px solid #ccc;
   padding-top: 2rem;
   padding-bottom: 6rem;
+
   img {
     width: 150px;
     height: 250px;
