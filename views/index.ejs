@@ -1,4 +1,4 @@
-<%- include('partials/header') %> <% if (locals.books){ %> <% books.forEach(book => { %>
+<%- include('partials/header') %> <% if (locals.books){ %> <% books.forEach((book,index) => { %>
 
 <h1>Books I've READ</h1>
 <p>
@@ -7,11 +7,11 @@
   sit quisquam illo. Debitis.
 </p>
 <br />
-<form id="myForm" action="/<%=shortenBookTitle(book.title)%>" method="post">
+<form id="myForm<%= index %>" action="/<%=shortenBookTitle(book.title)%>" method="post">
 <section class="book">
     <img src="<%=imageData%>" alt="Book cover" />
     <h2>
-      <a id="submitForm" href="/<%=shortenBookTitle(book.title)%>" name="title" value="<%=book.title%>"> <%= book.title %> </a>
+      <a class="submitFormLink" data-formid="myForm<%= index %>" data-booktitle="<%= book.title %>" href="#" name="title" value="<%=book.title%>"> <%= book.title %> </a>
     </h2>
     <input type="hidden" name="id" value="<%=book.id%>">
     <button type="submit">Submit</button>
@@ -26,3 +26,14 @@
 <%}); %> <%} else{ %>
 <h1>No books found.</h1>
 <% } %> <%- include('partials/footer') %>
+
+<script>
+  document.querySelectorAll(".submitFormLink").forEach(function(link) {
+      link.addEventListener("click", function(event) {
+          event.preventDefault(); // Prevent the default action of the anchor tag
+          const formId = this.dataset.formid;
+          document.getElementById(formId).submit(); // Submit the associated form
+      });
+  });
+</script>
+
