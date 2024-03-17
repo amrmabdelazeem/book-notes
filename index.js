@@ -101,17 +101,17 @@ let notes = [
 
 //https://covers.openlibrary.org/b/$key/$value-$size.jpg 
 app.get("/", async(req, res) => {
+
   try {
     const result = await db.query('SELECT * FROM books ORDER BY id ASC');
     books = result.rows;
-
 
     // const response = await axios.get(apiURL+'isbn/'+books.isbn+'-M.jpg');
     
     // let imageData = response.request.res.responseUrl;
     let imageData = 'null';
     
-    res.render("index.ejs", { books, notes, imageData });
+    res.render("index.ejs", { books, notes, imageData , shortenBookTitle});
   } catch (error) {
     console.log(error);
   }
@@ -122,8 +122,10 @@ app.get("/", async(req, res) => {
 //   res.render("notes.ejs");
 // });
 
-app.post("/edit", async (req, res)=>{
+app.post("/:name", async (req, res)=>{
+
   const currentBookId = req.body.id;
+  
   const result = await db.query('SELECT * FROM books INNER JOIN notes on books.id = notes.book_id where books.id = $1',[currentBookId]);
   notes = result.rows;
   const pBooksResult = await db.query('SELECT * FROM books where books.id = $1',[currentBookId]);

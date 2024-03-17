@@ -7,11 +7,11 @@
   sit quisquam illo. Debitis.
 </p>
 <br />
+<form id="myForm" action="/<%=shortenBookTitle(book.title)%>" method="post">
 <section class="book">
-  <form action="/edit" method="post">
     <img src="<%=imageData%>" alt="Book cover" />
     <h2>
-      <a href="" name="title" value="<%=book.title%>"> <%= book.title %> </a>
+      <a id="submitForm" href="/<%=shortenBookTitle(book.title)%>" name="title" value="<%=book.title%>"> <%= book.title %> </a>
     </h2>
     <input type="hidden" name="id" value="<%=book.id%>">
     <button type="submit">Submit</button>
@@ -21,8 +21,8 @@
     </small>
     <p><%=book.review%></p>
     <a class="notes" href="">Read my Notes</a>
-  </form>
 </section>
+</form>
 <%}); %> <%} else{ %>
 <h1>No books found.</h1>
 <% } %> <%- include('partials/footer') %>
