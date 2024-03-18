@@ -9,7 +9,7 @@
 <br />
 <form id="myForm<%= index %>" action="/<%=shortenBookTitle(book.title)%>" method="post">
 <section class="book">
-    <img src="<%=imageData%>" alt="Book cover" />
+    <img src="<%=bookCovers[index]%>" alt="Book cover" />
     <h2>
       <a class="submitFormLink" data-formid="myForm<%= index %>" data-booktitle="<%= book.title %>" href="#" name="title" value="<%=book.title%>"> <%= book.title %> </a>
     </h2>
