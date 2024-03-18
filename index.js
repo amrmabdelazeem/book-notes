@@ -1,4 +1,4 @@
-import express from "express";
+import express, { request, response } from "express";
 import pg from "pg";
 import bodyParser from "body-parser";
 import "dotenv/config";
@@ -6,7 +6,7 @@ import axios from "axios";
 
 const app = express();
 const port = 3000;
-// const apiURL = process.env.API_URL;
+const apiURL = process.env.API_URL;
 
 const db = new pg.Client({
   user: process.env.DB_USER,
@@ -99,19 +99,32 @@ let notes = [
   },
 ];
 
+async function getBookCover(booksList){
+  const requests = booksList.map((book, index) => {
+    const url = apiURL+'isbn/'+book.isbn+'-M.jpg';
+    return axios.get(url);
+    });
+
+    try{
+      const responses = await Promise.all(requests);
+      const covers = responses.map(response => response.config.url);
+      return covers;
+    }catch(error){
+      console.log(`Error fetching book covers: ${error.message}`);
+      return[];
+    }
+}
+
 //https://covers.openlibrary.org/b/$key/$value-$size.jpg 
 app.get("/", async(req, res) => {
-
+  
   try {
     const result = await db.query('SELECT * FROM books ORDER BY id ASC');
     books = result.rows;
-
-    // const response = await axios.get(apiURL+'isbn/'+books.isbn+'-M.jpg');
     
-    // let imageData = response.request.res.responseUrl;
-    let imageData = 'null';
+    const bookCovers = await getBookCover(books);
     
-    res.render("index.ejs", { books, notes, imageData , shortenBookTitle});
+    res.render("index.ejs", { books, notes, bookCovers , shortenBookTitle});
   } catch (error) {
     console.log(error);
   }
