@@ -144,8 +144,11 @@ app.post("/:name", async (req, res)=>{
   const pBooksResult = await db.query('SELECT * FROM books where books.id = $1',[currentBookId]);
   const selectedBook = pBooksResult.rows[0];
   console.log(selectedBook);
+
+  const bookCovers = await getBookCover(books);
+  const bookCover = bookCovers[currentBookId-1]
   // console.log(notes);
-  res.render("notes.ejs",{notes, selectedBook});
+  res.render("notes.ejs",{notes,bookCover ,selectedBook});
 });
 
 // db.end();

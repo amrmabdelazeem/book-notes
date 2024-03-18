@@ -1,7 +1,7 @@
 <%- include('partials/header') %>
 <section id="notes">
   <% if(locals.notes){ %>
-  <img src="./images/book-cover.webp" alt="Book cover" />
+  <img src="<%= bookCover %>" alt="Book cover" />
   <h1><%=selectedBook.title%></h1>
   <small>ISBN:<%=selectedBook.isbn%></small><br />
   <small>Date read: <%=selectedBook.date_read%></small><br />
