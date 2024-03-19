@@ -121,7 +121,7 @@ app.get("/", async(req, res) => {
   try {
     const result = await db.query('SELECT * FROM books ORDER BY id ASC');
     books = result.rows;
-    
+  
     const bookCovers = await getBookCover(books);
     
     res.render("index.ejs", { books, notes, bookCovers , shortenBookTitle});

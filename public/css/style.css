@@ -37,6 +37,9 @@ main p {
   font-size: 1.5rem;
   color: #ccc;
 }
+main a {
+  color: #080;
+}
 
 .book {
   border-top: 2px solid #ccc;

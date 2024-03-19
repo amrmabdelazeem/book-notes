@@ -7,7 +7,6 @@ $rating-color: #EFECEC;
 * {
   box-sizing: border-box;
   font-family: "Valkyrie C4";
-
 }
 html {
   background-color: #0C2D57;
@@ -41,6 +40,9 @@ main {
   p {
     font-size: 1.5rem;
     color: $parahraph-color;
+  }
+  a{
+    color: #080;
   }
 }
 
@@ -94,7 +96,7 @@ main {
     color: $rating-color;
 
     a{
-        color: adjust-color($color: $secondary-color, $alpha: 1.0)
+        color: adjust-color($color: $secondary-color, $alpha: 1.0);
     }
   }
 
