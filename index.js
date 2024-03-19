@@ -135,36 +135,45 @@ app.get("/", async(req, res) => {
 //   res.render("notes.ejs");
 // });
 
-app.post("/:name", async (req, res)=>{
+// app.post("/:name", async (req, res)=>{
 
-  const currentBookId = req.body.id;
+//   const currentBookId = req.body.id;
   
-  const result = await db.query('SELECT * FROM books INNER JOIN notes on books.id = notes.book_id where books.id = $1',[currentBookId]);
-  notes = result.rows;
-  const pBooksResult = await db.query('SELECT * FROM books where books.id = $1',[currentBookId]);
-  const selectedBook = pBooksResult.rows[0];
-  console.log(selectedBook);
+//   const result = await db.query('SELECT * FROM books INNER JOIN notes on books.id = notes.book_id where books.id = $1',[currentBookId]);
+//   notes = result.rows;
+//   const pBooksResult = await db.query('SELECT * FROM books where books.id = $1',[currentBookId]);
+//   const selectedBook = pBooksResult.rows[0];
+//   console.log(selectedBook);
 
-  const bookCovers = await getBookCover(books);
-  const bookCover = bookCovers[currentBookId-1]
-  // console.log(notes);
-  res.render("notes.ejs",{notes,bookCover ,selectedBook});
-});
+//   const bookCovers = await getBookCover(books);
+//   const bookCover = bookCovers[currentBookId-1]
+//   // console.log(notes);
+//   res.render("notes.ejs",{notes,bookCover ,selectedBook});
+// });
 
+let currentBookId;
 
 app.get("/:name", async (req, res)=>{
   
   const paramName = req.params.name;
   console.log(`Param is: ${paramName}`);
-  // const result = await db.query('SELECT * FROM books INNER JOIN notes on books.id = notes.book_id where books.id = $1',[currentBookId]);
-  // notes = result.rows;
-  const pBooksResult = await db.query('SELECT * FROM books where books.title = $1',[shortenBookTitle(paramName)]);
-  const selectedBook = pBooksResult.rows[0];
 
-  const bookCovers = await getBookCover(books);
-  const bookCover = bookCovers[selectedBook.id -1];
-  console.log(selectedBook);
-  res.render('notes.ejs',{selectedBook, bookCover});
+  const resultId = await db.query('SELECT books.id FROM books');
+  // const currentId = resultId.rows[0].id;
+  console.log(resultId);
+  // console.log("currentID "+currentId);
+  // const result = await db.query('SELECT * FROM books INNER JOIN notes on books.id = notes.book_id where books.title = $1',[shortenBookTitle(paramName)]);
+  // notes = result.rows;
+  // console.log(notes);
+  // const currentBookId = notes[0].book_id;
+  // const pBooksResult = await db.query('SELECT * FROM books where books.title = $1',[shortenBookTitle(paramName)]);
+  // const selectedBook = pBooksResult.rows[0];
+
+  // const bookCovers = await getBookCover(books);
+  // const bookCover = bookCovers[currentBookId];
+  // console.log(currentBookId);
+  // console.log(selectedBook);
+  res.render('notes.ejs',{notes, selectedBook, bookCover});
 });
 
 // db.end();

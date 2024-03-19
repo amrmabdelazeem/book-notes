@@ -8,11 +8,11 @@
 </p>
 <br />
 <% if (locals.books){ %> <% books.forEach((book,index) => { %>
-<form id="myForm<%= index %>" action="/<%=shortenBookTitle(book.title)%>" method="post">
+<!-- <form id="myForm<%= index %>" action="/<%=shortenBookTitle(book.title)%>" method="post"> -->
 <section class="book">
     <img src="<%=bookCovers[index]%>" alt="Book cover" loading="lazy"/>
     <h2>
-      <a class="submitFormLink" data-formid="myForm<%= index %>" data-booktitle="<%= book.title %>" href="#" name="title" value="<%=book.title%>"> <%= book.title %> </a>
+      <a class="submitFormLink" data-formid="myForm<%= index %>" data-booktitle="<%= book.title %>" href="/<%=shortenBookTitle(book.title)%>" name="title" value="<%=book.title%>"> <%= book.title %> </a>
     </h2>
     <input type="hidden" name="id" value="<%=book.id%>">
     <small
@@ -20,15 +20,15 @@
       <strong><%= book.rating %></strong>/10
     </small>
     <p><%=book.review%></p>
-    <a class="notes submitFormLink" href="#" data-formid="myForm<%= index %>" data-booktitle="<%= book.title %>" href="#" name="title" value="<%=book.title%>" >Read my Notes</a>
+    <a class="notes submitFormLink" data-formid="myForm<%= index %>" data-booktitle="<%= book.title %>" href="/<%=shortenBookTitle(book.title)%>" name="title" value="<%=book.title%>" >Read my Notes</a>
 
 </section>
-</form>
+<!-- </form> -->
 <%}); %> <%} else{ %>
 <h1>No books found.</h1>
 <% } %> <%- include('partials/footer') %>
 
-<script>
+<!-- <script>
   document.querySelectorAll(".submitFormLink").forEach((link)=> {
       link.addEventListener("click", function(event) {
           event.preventDefault(); // Prevent the default action of the anchor tag
@@ -36,5 +36,5 @@
           document.getElementById(formId).submit(); // Submit the associated form
       });
   });
-</script>
+</script> -->
 
