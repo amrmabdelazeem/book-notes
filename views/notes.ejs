@@ -1,6 +1,5 @@
 <%- include('partials/header') %>
 <section id="notes">
-  <% if(locals.notes){ %>
   <img src="<%= bookCover %>" alt="Book cover" />
   <h1><%=selectedBook.title%></h1>
   <small>ISBN:<%=selectedBook.isbn%></small><br />
@@ -13,8 +12,11 @@
     hic!
   </p>
   <h2>My Notes</h2>
+  <% if(locals.notes){ %>
   <% notes.forEach(note => { %>
   <p><%=note.note_description%></p>
-  <%}); %> <% } %>
+  <%}); %> <% }else{ %>
+    <p>no notes were found.</p>
+ <% } %>
 </section>
 <%- include('partials/footer') %>

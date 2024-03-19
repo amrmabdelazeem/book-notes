@@ -151,6 +151,22 @@ app.post("/:name", async (req, res)=>{
   res.render("notes.ejs",{notes,bookCover ,selectedBook});
 });
 
+
+app.get("/:name", async (req, res)=>{
+  
+  const paramName = req.params.name;
+  console.log(`Param is: ${paramName}`);
+  // const result = await db.query('SELECT * FROM books INNER JOIN notes on books.id = notes.book_id where books.id = $1',[currentBookId]);
+  // notes = result.rows;
+  const pBooksResult = await db.query('SELECT * FROM books where books.title = $1',[shortenBookTitle(paramName)]);
+  const selectedBook = pBooksResult.rows[0];
+
+  const bookCovers = await getBookCover(books);
+  const bookCover = bookCovers[selectedBook.id -1];
+  console.log(selectedBook);
+  res.render('notes.ejs',{selectedBook, bookCover});
+});
+
 // db.end();
 
 app.listen(port, () => {
