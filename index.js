@@ -23,39 +23,78 @@ app.use(express.static("public"));
 
 function shortenBookTitle(title) {
   // Split the title into an array of words
-  const words = title.split(' ');
+  const words = title.split(" ");
   // Define a list of definite and indefinite articles and other words to filter
-    const filterWords = ['the', 'a', 'an', 'by', 'can', 'could', 'may', 'might', 'must', 'shall', 'should', 'will', 'would', 'I', 'you', 'he', 'she', 'it', 'we', 'they', 'me', 'him', 'her', 'us', 'them'];
+  const filterWords = [
+    "the",
+    "a",
+    "an",
+    "by",
+    "can",
+    "could",
+    "may",
+    "might",
+    "must",
+    "shall",
+    "should",
+    "will",
+    "would",
+    "I",
+    "you",
+    "he",
+    "she",
+    "it",
+    "we",
+    "they",
+    "me",
+    "him",
+    "her",
+    "us",
+    "them",
+  ];
 
-  const hyphenIndex = words.indexOf('-');
+  const hyphenIndex = words.indexOf("-");
+  const colonIndex = words.indexOf(":");
 
-  // Filter out articles and other specified words from the array of words before the "-" character
+  // Filter out articles and other specified words from the array of words before the "-" or ":" character
   let filteredWords;
   if (hyphenIndex !== -1) {
-      filteredWords = words.slice(0, hyphenIndex).filter(word => !filterWords.includes(word.toLowerCase()));
+    filteredWords = words
+      .slice(0, hyphenIndex)
+      .filter((word) => !filterWords.includes(word.toLowerCase()));
+
+    } else if (colonIndex !== -1) {
+    filteredWords = words
+      .slice(0, colonIndex)
+      .filter((word) => !filterWords.includes(word.toLowerCase()));
   } else {
-      filteredWords = words.filter(word => !filterWords.includes(word.toLowerCase()));
+    filteredWords = words.filter((word) => !filterWords.includes(word.toLowerCase()));
   }
 
   // Check for - in the first word after filtering
   for (let i = 0; i < filteredWords.length; i++) {
     const filteredWord = filteredWords[i];
-    if (filteredWord.includes('-')) {
-        const hyphenIndex = filteredWord.indexOf('-');
-        
-        filteredWords[i] = filteredWord.replace('-', '');
+    
+    if (filteredWord.includes("-")) {
+      const hyphenIndex = filteredWord.indexOf("-");
+      if (hyphenIndex - 1 !== " ") {
+        filteredWords[i] = filteredWord.replace("-", "");
+      } else {
+        filteredWords = filteredWord.slice(0, hyphenIndex);
+      }
+    } else if (filteredWord.includes(":")) {
+      const colonIndex = filteredWord.indexOf(":");
+      filteredWords[i]= filteredWord.replace(":","");
     }
-}
+  }
   // Capitalize the first letter of each word and join the words back together
-  const shortenedTitle = filteredWords.map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('');
-  
+
+  const shortenedTitle = filteredWords
+  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+  .join("");
+
   return shortenedTitle;
 }
-
-// const originalTitle = "E-Myth Revisited - by Michael Gerber";
-// const shortenedTitle = shortenBookTitle(originalTitle);
-
-// console.log(shortenedTitle);
 
 let books = [
   {
@@ -99,46 +138,40 @@ let notes = [
   },
 ];
 
-async function getBookCover(booksList){
+async function getBookCover(booksList) {
   const requests = booksList.map((book, index) => {
-    const url = apiURL+'isbn/'+book.isbn+'-M.jpg';
+    const url = apiURL + "isbn/" + book.isbn + "-M.jpg";
     return axios.get(url);
-    });
+  });
 
-    try{
-      const responses = await Promise.all(requests);
-      const covers = responses.map(response => response.config.url);
-      return covers;
-    }catch(error){
-      console.log(`Error fetching book covers: ${error.message}`);
-      return[];
-    }
+  try {
+    const responses = await Promise.all(requests);
+    const covers = responses.map((response) => response.config.url);
+    return covers;
+  } catch (error) {
+    console.log(`Error fetching book covers: ${error.message}`);
+    return [];
+  }
 }
 
-//https://covers.openlibrary.org/b/$key/$value-$size.jpg 
-app.get("/", async(req, res) => {
-  
+//https://covers.openlibrary.org/b/$key/$value-$size.jpg
+app.get("/", async (req, res) => {
   try {
-    const result = await db.query('SELECT * FROM books ORDER BY id ASC');
+    const result = await db.query("SELECT * FROM books ORDER BY id ASC");
     books = result.rows;
-  
+
     const bookCovers = await getBookCover(books);
-    
-    res.render("index.ejs", { books, notes, bookCovers , shortenBookTitle});
+
+    res.render("index.ejs", { books, notes, bookCovers, shortenBookTitle });
   } catch (error) {
     console.log(error);
   }
-
 });
-
-// app.get("/notes", (req, res)=>{
-//   res.render("notes.ejs");
-// });
 
 // app.post("/:name", async (req, res)=>{
 
 //   const currentBookId = req.body.id;
-  
+
 //   const result = await db.query('SELECT * FROM books INNER JOIN notes on books.id = notes.book_id where books.id = $1',[currentBookId]);
 //   notes = result.rows;
 //   const pBooksResult = await db.query('SELECT * FROM books where books.id = $1',[currentBookId]);
@@ -153,12 +186,13 @@ app.get("/", async(req, res) => {
 
 let currentBookId;
 
-app.get("/:name", async (req, res)=>{
-  
+app.get("/:name", async (req, res) => {
   const paramName = req.params.name;
   console.log(`Param is: ${paramName}`);
 
-  const resultId = await db.query('SELECT books.id FROM books');
+  const resultId = await db.query("SELECT books.id FROM books WHERE books.title LIKE '%'||$1 ", [
+    paramName,
+  ]);
   // const currentId = resultId.rows[0].id;
   console.log(resultId);
   // console.log("currentID "+currentId);
@@ -167,13 +201,14 @@ app.get("/:name", async (req, res)=>{
   // console.log(notes);
   // const currentBookId = notes[0].book_id;
   // const pBooksResult = await db.query('SELECT * FROM books where books.title = $1',[shortenBookTitle(paramName)]);
+  // console.log(pBooksResult);
   // const selectedBook = pBooksResult.rows[0];
 
   // const bookCovers = await getBookCover(books);
   // const bookCover = bookCovers[currentBookId];
   // console.log(currentBookId);
   // console.log(selectedBook);
-  res.render('notes.ejs',{notes, selectedBook, bookCover});
+  res.render("notes.ejs", { notes, selectedBook, bookCover });
 });
 
 // db.end();
