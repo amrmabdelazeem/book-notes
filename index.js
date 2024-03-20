@@ -154,15 +154,29 @@ async function getBookCover(booksList) {
   }
 }
 
+let sortType = "id";
+// Prevent sql injection into the DB
+function checkSorting(sortCheck){
+  const columnList = ["id", "title", "rating", "date_read"];
+  if(columnList.includes(sortCheck)){
+    sortType = sortCheck;
+    console.log("we are here "+sortType);
+  }else{
+    console.log("prevented injection");
+    sortType = "id";
+  }
+}
 //https://covers.openlibrary.org/b/$key/$value-$size.jpg
 app.get("/", async (req, res) => {
+  
   try {
-    const result = await db.query("SELECT * FROM books ORDER BY id ASC");
+    const sql = `SELECT * FROM books ORDER BY ${sortType} ASC`
+    const result = await db.query(sql);
     books = result.rows;
 
     const bookCovers = await getBookCover(books);
 
-    res.render("index.ejs", { books, notes, bookCovers, shortenBookTitle });
+    res.render("index.ejs", { books, bookCovers, shortenBookTitle });
   } catch (error) {
     console.log(error);
   }
@@ -185,31 +199,42 @@ app.get("/", async (req, res) => {
 // });
 
 
-app.get("/:name", async (req, res) => {
-  const paramName = req.params.name;
-  console.log(`Param is: ${paramName}`);
+// app.get("/:name", async (req, res) => {
+//   const paramName = req.params.name;
+//   console.log(`Param is: ${paramName}`);
 
+//   try {
+//     const result = await db.query('SELECT * FROM books INNER JOIN notes on books.id = notes.book_id where books.route = $1',[paramName]);
+//     notes = result.rows;
+//     // console.log(notes);
+    
+//     const pBooksResult = await db.query('SELECT * FROM books where books.route = $1',[paramName]);
+    
+//     const selectedBook = pBooksResult.rows[0];
+//     const currentBookId = selectedBook.id;
+  
+  
+//     const bookCovers = await getBookCover(books);
+//     // console.log(bookCovers);
+//     const bookCover = bookCovers[currentBookId-1];
+//     // console.log(currentBookId);
+//     // console.log(selectedBook);
+//     res.render("notes.ejs", { notes, selectedBook, bookCover });
+//   } catch (error) {
+//     console.log(error);
+//     res.redirect("/");
+//   }
+
+// });
+
+app.post("/sort", (req, res)=>{
   try {
-    const result = await db.query('SELECT * FROM books INNER JOIN notes on books.id = notes.book_id where books.route = $1',[paramName]);
-    notes = result.rows;
-    console.log(notes);
-    
-    const pBooksResult = await db.query('SELECT * FROM books where books.route = $1',[paramName]);
-    
-    const selectedBook = pBooksResult.rows[0];
-    const currentBookId = selectedBook.id;
-  
-  
-    const bookCovers = await getBookCover(books);
-    console.log(bookCovers);
-    const bookCover = bookCovers[currentBookId-1];
-    console.log(currentBookId);
-    // console.log(selectedBook);
-    res.render("notes.ejs", { notes, selectedBook, bookCover });
+    sortType = req.body.sort;
+    checkSorting(sortType);
+    res.redirect('/'); 
   } catch (error) {
     console.log(error);
   }
-
 });
 
 // db.end();
