@@ -2,7 +2,7 @@
 <section id="notes">
   <img src="<%= bookCover %>" alt="Book cover" />
   <h1><%=selectedBook.title%></h1>
-  <small>ISBN:<%=selectedBook.isbn%></small><br />
+  <small>ISBN: <%=selectedBook.isbn%></small><br />
   <small>Date read: <%=selectedBook.date_read%></small><br />
   <small>How strongly I recommend it: <%=selectedBook.rating%>/10</small><br /><br />
   <strong>(See <a href="/">my list of all books</a>, for more.)</strong>
@@ -12,10 +12,10 @@
     hic!
   </p>
   <h2>My Notes</h2>
-  <% if(locals.notes){ %>
+  <% if(locals.notes.length > 0){ %>
   <% notes.forEach(note => { %>
   <p><%=note.note_description%></p>
-  <%}); %> <% }else{ %>
+  <%});}else{ %>
     <p>no notes were found.</p>
  <% } %>
 </section>
