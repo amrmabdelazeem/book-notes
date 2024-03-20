@@ -113,7 +113,7 @@ let books = [
     review:
       "Fitzgerald can set a scene so perfectly, flawlessly. He paints a world of magic and introduces one of the greatest characters of all time, Jay Gatsby. Gatsby is the embodiment of hope, and no one can dissuade him from his dreams. Have you ever had a dream that carried you to heights you could never have dreamed otherwise? When Gatsby is reunited with Daisy Buchanan, he fills the space to the brim with flowers, creating a living dream. How is anyone supposed to compete with that?",
     date_read: "2024-03-13",
-    isbn: 9781638434665,
+    isbn: 1542878160,
   },
 ];
 
@@ -200,9 +200,10 @@ app.get("/:name", async (req, res) => {
 
 
   const bookCovers = await getBookCover(books);
-  const bookCover = bookCovers[currentBookId];
+  console.log(bookCovers);
+  const bookCover = bookCovers[currentBookId-1];
   console.log(currentBookId);
-  console.log(selectedBook);
+  // console.log(selectedBook);
   res.render("notes.ejs", { notes, selectedBook, bookCover });
 });
 
