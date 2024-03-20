@@ -1,0 +1,17 @@
+<%- include('partials/header') %>
+<header>Add New Book:</header>
+<div class="addBook">
+  <label for="title">Title: </label><br />
+  <input type="text" name="title" id="title" required /><br />
+  <label for="isbn">ISBN: </label><br />
+  <input type="number" name="isbn" id="isbn" required /><br />
+  <label for="rating">Rating: </label><br />
+  <input type="number" name="rating" id="rating" required /><br />
+  <label for="date_read">Date Read: </label><br />
+  <input type="text" name="date_read" id="date_read" required /><span> format:yyyy-mm-dd</span
+  ><br />
+  <label for="review">Review:</label><br />
+  <textarea name="review" id="review" cols="32" rows="5" required></textarea><br />
+  <button type="submit">Add Book</button>
+</div>
+<%- include('partials/footer') %>
