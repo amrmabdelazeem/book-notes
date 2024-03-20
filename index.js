@@ -29,6 +29,7 @@ function shortenBookTitle(title) {
     "the",
     "a",
     "an",
+    "of",
     "by",
     "can",
     "could",
@@ -62,8 +63,7 @@ function shortenBookTitle(title) {
     filteredWords = words
       .slice(0, hyphenIndex)
       .filter((word) => !filterWords.includes(word.toLowerCase()));
-
-    } else if (colonIndex !== -1) {
+  } else if (colonIndex !== -1) {
     filteredWords = words
       .slice(0, colonIndex)
       .filter((word) => !filterWords.includes(word.toLowerCase()));
@@ -74,7 +74,7 @@ function shortenBookTitle(title) {
   // Check for - in the first word after filtering
   for (let i = 0; i < filteredWords.length; i++) {
     const filteredWord = filteredWords[i];
-    
+
     if (filteredWord.includes("-")) {
       const hyphenIndex = filteredWord.indexOf("-");
       if (hyphenIndex - 1 !== " ") {
@@ -84,14 +84,14 @@ function shortenBookTitle(title) {
       }
     } else if (filteredWord.includes(":")) {
       const colonIndex = filteredWord.indexOf(":");
-      filteredWords[i]= filteredWord.replace(":","");
+      filteredWords[i] = filteredWord.replace(":", "");
     }
   }
   // Capitalize the first letter of each word and join the words back together
 
   const shortenedTitle = filteredWords
-  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-  .join("");
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join("");
 
   return shortenedTitle;
 }
@@ -156,21 +156,20 @@ async function getBookCover(booksList) {
 
 let sortType = "id";
 // Prevent sql injection into the DB
-function checkSorting(sortCheck){
+function checkSorting(sortCheck) {
   const columnList = ["id", "title", "rating", "date_read"];
-  if(columnList.includes(sortCheck)){
+  if (columnList.includes(sortCheck)) {
     sortType = sortCheck;
-    console.log("we are here "+sortType);
-  }else{
+    console.log("we are here " + sortType);
+  } else {
     console.log("prevented injection");
     sortType = "id";
   }
 }
 //https://covers.openlibrary.org/b/$key/$value-$size.jpg
 app.get("/", async (req, res) => {
-  
   try {
-    const sql = `SELECT * FROM books ORDER BY ${sortType} ASC`
+    const sql = `SELECT * FROM books ORDER BY ${sortType} ASC`;
     const result = await db.query(sql);
     books = result.rows;
 
@@ -182,11 +181,81 @@ app.get("/", async (req, res) => {
   }
 });
 
-app.post("/sort", (req, res)=>{
+// app.post("/:name", async (req, res)=>{
+
+//   const currentBookId = req.body.id;
+
+//   const result = await db.query('SELECT * FROM books INNER JOIN notes on books.id = notes.book_id where books.id = $1',[currentBookId]);
+//   notes = result.rows;
+//   const pBooksResult = await db.query('SELECT * FROM books where books.id = $1',[currentBookId]);
+//   const selectedBook = pBooksResult.rows[0];
+//   console.log(selectedBook);
+
+//   const bookCovers = await getBookCover(books);
+//   const bookCover = bookCovers[currentBookId-1]
+//   // console.log(notes);
+//   res.render("notes.ejs",{notes,bookCover ,selectedBook});
+// });
+
+app.get("/:name", async (req, res) => {
+  const paramName = req.params.name;
+  if (paramName !== "add") {
+    try {
+      console.log(`Param is: ${paramName}`);
+      const result = await db.query(
+        "SELECT * FROM books INNER JOIN notes on books.id = notes.book_id where books.route = $1",
+        [paramName]
+      );
+      notes = result.rows;
+      // console.log(notes);
+
+      const pBooksResult = await db.query("SELECT * FROM books where books.route = $1", [
+        paramName,
+      ]);
+
+      const selectedBook = pBooksResult.rows[0];
+      const currentBookId = selectedBook.id;
+
+      const bookCovers = await getBookCover(books);
+      // console.log(bookCovers);
+      const bookCover = bookCovers[currentBookId - 1];
+      // console.log(currentBookId);
+      // console.log(selectedBook);
+      res.render("notes.ejs", { notes, selectedBook, bookCover });
+    } catch (error) {
+      console.log(error);
+      res.redirect("/");
+    }
+  } else {
+    res.render("add.ejs");
+  }
+});
+
+app.post("/add", async (req, res) => {
+  const { title, date_read, review } = req.body;
+  const isbn = Number(req.body.isbn);
+  const rating = parseInt(req.body.rating);
+  const route = shortenBookTitle(title);
+
+  try {
+    await db.query(
+      "INSERT INTO books (title, isbn, rating, date_read, review, route) VALUES($1, $2, $3, $4, $5, $6)",
+      [title, isbn, rating, date_read, review, route]
+    );
+
+    res.redirect("/");
+  } catch (error) {
+    console.log(error);
+    res.render("add.ejs");
+  }
+  
+});
+
+app.post("/sort", (req, res) => {
   try {
     sortType = req.body.sort;
     checkSorting(sortType);
-    res.redirect('/'); 
+    res.redirect("/");
   } catch (error) {
     console.log(error);
   }
