@@ -189,22 +189,27 @@ app.get("/:name", async (req, res) => {
   const paramName = req.params.name;
   console.log(`Param is: ${paramName}`);
 
-  const result = await db.query('SELECT * FROM books INNER JOIN notes on books.id = notes.book_id where books.route = $1',[paramName]);
-  notes = result.rows;
-  console.log(notes);
+  try {
+    const result = await db.query('SELECT * FROM books INNER JOIN notes on books.id = notes.book_id where books.route = $1',[paramName]);
+    notes = result.rows;
+    console.log(notes);
+    
+    const pBooksResult = await db.query('SELECT * FROM books where books.route = $1',[paramName]);
+    
+    const selectedBook = pBooksResult.rows[0];
+    const currentBookId = selectedBook.id;
   
-  const pBooksResult = await db.query('SELECT * FROM books where books.route = $1',[paramName]);
   
-  const selectedBook = pBooksResult.rows[0];
-  const currentBookId = selectedBook.id;
+    const bookCovers = await getBookCover(books);
+    console.log(bookCovers);
+    const bookCover = bookCovers[currentBookId-1];
+    console.log(currentBookId);
+    // console.log(selectedBook);
+    res.render("notes.ejs", { notes, selectedBook, bookCover });
+  } catch (error) {
+    console.log(error);
+  }
 
-
-  const bookCovers = await getBookCover(books);
-  console.log(bookCovers);
-  const bookCover = bookCovers[currentBookId-1];
-  console.log(currentBookId);
-  // console.log(selectedBook);
-  res.render("notes.ejs", { notes, selectedBook, bookCover });
 });
 
 // db.end();
