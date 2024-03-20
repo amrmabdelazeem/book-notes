@@ -184,30 +184,25 @@ app.get("/", async (req, res) => {
 //   res.render("notes.ejs",{notes,bookCover ,selectedBook});
 // });
 
-let currentBookId;
 
 app.get("/:name", async (req, res) => {
   const paramName = req.params.name;
   console.log(`Param is: ${paramName}`);
 
-  const resultId = await db.query("SELECT books.id FROM books WHERE books.title LIKE '%'||$1 ", [
-    paramName,
-  ]);
-  // const currentId = resultId.rows[0].id;
-  console.log(resultId);
-  // console.log("currentID "+currentId);
-  // const result = await db.query('SELECT * FROM books INNER JOIN notes on books.id = notes.book_id where books.title = $1',[shortenBookTitle(paramName)]);
-  // notes = result.rows;
-  // console.log(notes);
-  // const currentBookId = notes[0].book_id;
-  // const pBooksResult = await db.query('SELECT * FROM books where books.title = $1',[shortenBookTitle(paramName)]);
-  // console.log(pBooksResult);
-  // const selectedBook = pBooksResult.rows[0];
+  const result = await db.query('SELECT * FROM books INNER JOIN notes on books.id = notes.book_id where books.route = $1',[paramName]);
+  notes = result.rows;
+  console.log(notes);
+  
+  const pBooksResult = await db.query('SELECT * FROM books where books.route = $1',[paramName]);
+  
+  const selectedBook = pBooksResult.rows[0];
+  const currentBookId = selectedBook.id;
 
-  // const bookCovers = await getBookCover(books);
-  // const bookCover = bookCovers[currentBookId];
-  // console.log(currentBookId);
-  // console.log(selectedBook);
+
+  const bookCovers = await getBookCover(books);
+  const bookCover = bookCovers[currentBookId];
+  console.log(currentBookId);
+  console.log(selectedBook);
   res.render("notes.ejs", { notes, selectedBook, bookCover });
 });
 
