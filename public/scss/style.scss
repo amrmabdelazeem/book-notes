@@ -21,16 +21,12 @@ main {
     letter-spacing: 2px;
   }
   header {
-    font-size: 3rem;
+    font-size: 2.5rem;
     color: #080;
     margin: 2rem 0;
   }
-
-  .sortSection {
-    text-align: right;
-  }
   h1 {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     margin-top: 0;
   }
   h2 {
@@ -48,6 +44,32 @@ main {
   a {
     color: #080;
   }
+  .forms{
+    display: flex;
+    justify-content: space-between;
+  }
+  .addBook{
+    span{
+      color: #fc6736;
+    }
+    label{
+      color: #fc6736;
+    }
+    input{
+      margin-bottom: 1rem;
+    }
+    input[type=number]{
+      &::-webkit-outer-spin-button, &::-webkit-inner-spin-button{
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      -moz-appearance: textfield;
+    }
+    textarea{
+      margin-bottom: 1rem;
+    }
+  }
+
 }
 
 .book {

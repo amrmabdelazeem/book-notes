@@ -17,15 +17,12 @@ main :is(h1, h2) {
   letter-spacing: 2px;
 }
 main header {
-  font-size: 3rem;
+  font-size: 2.5rem;
   color: #080;
   margin: 2rem 0;
 }
-main .sortSection {
-  text-align: right;
-}
 main h1 {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   margin-top: 0;
 }
 main h2 {
@@ -42,6 +39,29 @@ main p {
 }
 main a {
   color: #080;
+}
+main .forms {
+  display: flex;
+  justify-content: space-between;
+}
+main .addBook span {
+  color: #fc6736;
+}
+main .addBook label {
+  color: #fc6736;
+}
+main .addBook input {
+  margin-bottom: 1rem;
+}
+main .addBook input[type=number] {
+  -moz-appearance: textfield;
+}
+main .addBook input[type=number]::-webkit-outer-spin-button, main .addBook input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+main .addBook textarea {
+  margin-bottom: 1rem;
 }
 
 .book {
