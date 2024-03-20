@@ -1,20 +1,25 @@
 <%- include('partials/header') %>
-
+<header>Welcome to my Books Collection</header>
 <h1>Books I've READ</h1>
 <p>
   Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit, voluptates velit! Iusto minima
   nesciunt sequi sunt voluptatum, quo voluptate, optio maxime et suscipit fugiat blanditiis saepe,
   sit quisquam illo. Debitis.
 </p>
-<form action="/sort" method="post" class="sortSection">
-  <select name="sort" id="sort" onchange="this.form.submit()">
-    <option selected>Sort Books</option>
-    <option value="id">Sort By ID</option>
-    <option value="rating">Sort By Rating</option>
-    <option value="title">Sort By Book Title</option>
-    <option value="date_read">Sort By Date Read</option>
-  </select>
-</form>
+<div class="forms">
+  <form action="/add" method="get">
+    <button type="submit">Add New Book</button>
+  </form>
+  <form action="/sort" method="post" class="sortSection">
+    <select name="sort" id="sort" onchange="this.form.submit()">
+      <option selected>Sort Books</option>
+      <option value="id">Sort By ID</option>
+      <option value="rating">Sort By Rating</option>
+      <option value="title">Sort By Book Title</option>
+      <option value="date_read">Sort By Date Read</option>
+    </select>
+  </form>
+</div>
 <br />
 <% if (locals.books){ %> <% books.forEach((book,index) => { %>
 
