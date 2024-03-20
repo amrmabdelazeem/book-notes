@@ -1,15 +1,15 @@
 //Variables
-$primary-color: #FFB0B0;
-$secondary-color: #FC6736;
+$primary-color: #ffb0b0;
+$secondary-color: #fc6736;
 $parahraph-color: #ccc;
-$rating-color: #EFECEC;
+$rating-color: #efecec;
 
 * {
   box-sizing: border-box;
   font-family: "Valkyrie C4";
 }
 html {
-  background-color: #0C2D57;
+  background-color: #0c2d57;
 }
 body {
   max-width: 800px;
@@ -20,10 +20,14 @@ main {
     color: $primary-color;
     letter-spacing: 2px;
   }
-  header{
+  header {
     font-size: 3rem;
     color: #080;
     margin: 2rem 0;
+  }
+
+  .sortSection {
+    text-align: right;
   }
   h1 {
     font-size: 2.5rem;
@@ -41,7 +45,7 @@ main {
     font-size: 1.5rem;
     color: $parahraph-color;
   }
-  a{
+  a {
     color: #080;
   }
 }
@@ -95,8 +99,8 @@ main {
   strong {
     color: $rating-color;
 
-    a{
-        color: adjust-color($color: $secondary-color, $alpha: 1.0);
+    a {
+      color: adjust-color($color: $secondary-color, $alpha: 1);
     }
   }
 
