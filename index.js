@@ -264,9 +264,16 @@ app.post("/submit", async (req, res) => {
   const id = req.body.id;
   const review = req.body.review;
 
-  const result = await db.query("UPDATE BOOKS SET review = $1 WHERE books.id = $2 RETURNING *", [review, id]);
-  const currentRoute = result.rows[0].route;
-  res.redirect(`/${currentRoute}`);
+  try {
+    const result = await db.query("UPDATE BOOKS SET review = $1 WHERE books.id = $2 RETURNING *", [
+      review,
+      id,
+    ]);
+    const currentRoute = result.rows[0].route;
+    res.redirect(`/${currentRoute}`);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 app.post("/sort", (req, res) => {
@@ -279,6 +286,7 @@ app.post("/sort", (req, res) => {
   }
 });
 
+app.delete("/delete", async (req, res) => {});
 // db.end();
 
 app.listen(port, () => {
