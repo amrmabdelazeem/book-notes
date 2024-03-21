@@ -202,7 +202,7 @@ app.get("/:name", async (req, res) => {
   const paramName = req.params.name;
   if (paramName !== "add" && paramName !== "edit") {
     try {
-      console.log(`Param is: ${paramName}`);
+      console.log(`Current route is /${paramName}`);
       const result = await db.query(
         "SELECT * FROM books INNER JOIN notes on books.id = notes.book_id where books.route = $1",
         [paramName]
