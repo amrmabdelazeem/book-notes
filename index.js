@@ -286,7 +286,16 @@ app.post("/sort", (req, res) => {
   }
 });
 
-app.delete("/delete", async (req, res) => {});
+app.post("/delete/:id", async (req, res) => {
+  const noteId = req.params.id;
+
+  try {
+    const result = db.query('DELETE FROM notes WHERE notes.note_id = $1',[noteId]);
+    res.redirect("/");
+  } catch (error) {
+    console.log(error);
+  }
+});
 // db.end();
 
 app.listen(port, () => {
