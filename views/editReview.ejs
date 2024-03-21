@@ -1,0 +1,8 @@
+<%- include('partials/header') %>
+<form action="/submit" method="post" class="edit-review">
+  <label for="review">Edit Review:</label><br />
+  <input type="hidden" name="id" value="<%=reviewId%>">
+  <textarea name="review" id="review" cols="40" rows="10" required><%= oldReview.review %></textarea><br />
+  <button type="submit">Submit Review</button>
+</form>
+<%- include('partials/footer') %>

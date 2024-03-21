@@ -67,13 +67,14 @@ main .addBook textarea {
 .book {
   border-top: 2px solid #ccc;
   padding-top: 2rem;
-  padding-bottom: 6rem;
+  padding-bottom: 4rem;
 }
 .book img {
   width: 150px;
   height: 250px;
   float: left;
   margin-right: 2rem;
+  margin-bottom: 1rem;
   background-color: #ccc;
 }
 .book h3 {
@@ -83,6 +84,9 @@ main .addBook textarea {
 .book small {
   color: #efecec;
   font-size: 1rem;
+}
+.book .review {
+  margin: 1rem 0;
 }
 .book .notes {
   font-size: 2rem;
@@ -103,6 +107,9 @@ main .addBook textarea {
   font-size: 2.5rem;
   color: #ffb0b0;
 }
+#notes p {
+  clear: both;
+}
 #notes small {
   color: #efecec;
   font-size: 1rem;
@@ -116,6 +123,24 @@ main .addBook textarea {
 }
 #notes .notes {
   font-size: 2rem;
+}
+
+.edit-review {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  gap: 1rem;
+}
+.edit-review label {
+  color: #efecec;
+}
+.edit-review button {
+  align-self: center;
+  padding: 1rem;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=style.css.map */

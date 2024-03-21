@@ -138,21 +138,22 @@ let notes = [
   },
 ];
 
-async function getBookCover(booksList) {
-  const requests = booksList.map((book, index) => {
-    const url = apiURL + "isbn/" + book.isbn + "-M.jpg";
-    return axios.get(url);
-  });
+const bookCover = "/images/book-cover.webp";
+// async function getBookCover(booksList) {
+//   const requests = booksList.map((book, index) => {
+//     const url = apiURL + "isbn/" + book.isbn + "-M.jpg";
+//     return axios.get(url);
+//   });
 
-  try {
-    const responses = await Promise.all(requests);
-    const covers = responses.map((response) => response.config.url);
-    return covers;
-  } catch (error) {
-    console.log(`Error fetching book covers: ${error.message}`);
-    return [];
-  }
-}
+//   try {
+//     const responses = await Promise.all(requests);
+//     const covers = responses.map((response) => response.config.url);
+//     return covers;
+//   } catch (error) {
+//     console.log(`Error fetching book covers: ${error.message}`);
+//     return [];
+//   }
+// }
 
 let sortType = "id";
 // Prevent sql injection into the DB
@@ -173,9 +174,9 @@ app.get("/", async (req, res) => {
     const result = await db.query(sql);
     books = result.rows;
 
-    const bookCovers = await getBookCover(books);
+    // const bookCovers = await getBookCover(books);
 
-    res.render("index.ejs", { books, bookCovers, shortenBookTitle });
+    res.render("index.ejs", { books, bookCover, shortenBookTitle });
   } catch (error) {
     console.log(error);
   }
@@ -199,7 +200,7 @@ app.get("/", async (req, res) => {
 
 app.get("/:name", async (req, res) => {
   const paramName = req.params.name;
-  if (paramName !== "add") {
+  if (paramName !== "add" && paramName !== "edit") {
     try {
       console.log(`Param is: ${paramName}`);
       const result = await db.query(
@@ -216,9 +217,9 @@ app.get("/:name", async (req, res) => {
       const selectedBook = pBooksResult.rows[0];
       const currentBookId = selectedBook.id;
 
-      const bookCovers = await getBookCover(books);
+      // const bookCovers = await getBookCover(books);
       // console.log(bookCovers);
-      const bookCover = bookCovers[currentBookId - 1];
+      // const bookCover = bookCovers[currentBookId - 1];
       // console.log(currentBookId);
       // console.log(selectedBook);
       res.render("notes.ejs", { notes, selectedBook, bookCover });
@@ -226,7 +227,7 @@ app.get("/:name", async (req, res) => {
       console.log(error);
       res.redirect("/");
     }
-  } else {
+  } else if (paramName === "add") {
     res.render("add.ejs");
   }
 });
@@ -248,7 +249,24 @@ app.post("/add", async (req, res) => {
     console.log(error);
     res.render("add.ejs");
   }
-  
+});
+
+app.post("/edit", async (req, res) => {
+  const reviewId = req.body.id;
+
+  const result = await db.query("SELECT review FROM BOOKS WHERE books.id = $1", [reviewId]);
+  const oldReview = result.rows[0];
+
+  res.render("editReview.ejs", { oldReview, reviewId });
+});
+
+app.post("/submit", async (req, res) => {
+  const id = req.body.id;
+  const review = req.body.review;
+
+  const result = await db.query("UPDATE BOOKS SET review = $1 WHERE books.id = $2 RETURNING *", [review, id]);
+  const currentRoute = result.rows[0].route;
+  res.redirect(`/${currentRoute}`);
 });
 
 app.post("/sort", (req, res) => {

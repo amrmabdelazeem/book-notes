@@ -24,7 +24,7 @@
 <% if (locals.books){ %> <% books.forEach((book,index) => { %>
 
 <section class="book">
-  <img src="<%=bookCovers[index]%>" alt="Book cover" loading="lazy" />
+  <img src="<%=bookCover%>" alt="Book cover" loading="lazy" />
   <h2>
     <a
       class="submitFormLink"
@@ -37,12 +37,12 @@
       <%= book.title %>
     </a>
   </h2>
-  <input type="hidden" name="id" value="<%=book.id%>" />
-  <small
-    >Date read: <%= book.date_read %>. How strongly I recommend it:
-    <strong><%= book.rating %></strong>/10
-  </small>
-  <p><%=book.review%></p>
+    <input type="hidden" name="id" value="<%=book.id%>" />
+    <small
+      >Date read: <%= book.date_read %>. How strongly I recommend it:
+      <strong><%= book.rating %></strong>/10
+    </small>
+    <p name="id" value="<%= book.id %>"><%=book.review%></p>
   <a
     class="notes submitFormLink"
     data-formid="myForm<%= index %>"

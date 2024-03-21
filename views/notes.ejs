@@ -1,23 +1,26 @@
 <%- include('partials/header') %>
 <header>Welcome to my Books Notes!</header>
 <section id="notes">
-  <img src="<%= bookCover %>" alt="Book cover" />
-  <h1><%=selectedBook.title%></h1>
-  <small>ISBN: <%=selectedBook.isbn%></small><br />
-  <small>Date read: <%=selectedBook.date_read%></small><br />
-  <small>How strongly I recommend it: <%=selectedBook.rating%>/10</small><br /><br />
-  <strong>(See <a href="/">my list of all books</a>, for more.)</strong>
-  <p>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque veniam at a, ipsa asperiores
-    ducimus eaque quidem harum sunt adipisci, qui dolorum odit nemo? Illo quia totam sint repellat
-    hic!
-  </p>
+  <form action="/edit" method="post">
+    <input type="hidden" name="id" value="<%=selectedBook.id%>" />
+    <img src="<%= bookCover %>" alt="Book cover" />
+    <h1><%=selectedBook.title%></h1>
+    <small>ISBN: <%=selectedBook.isbn%></small><br />
+    <small>Date read: <%=selectedBook.date_read%></small><br />
+    <small>How strongly I recommend it: <%=selectedBook.rating%>/10</small><br /><br />
+    <strong>(See <a href="/">my list of all books</a>, for more.)</strong>
+    <div class="review">
+      <p><%= selectedBook.review %></p>
+      <br />
+      <button type="submit">Edit Review</button>
+    </div>
+  </form>
+  <hr>
   <h2>My Notes</h2>
-  <% if(locals.notes.length > 0){ %>
-  <% notes.forEach(note => { %>
+  <% if(locals.notes.length > 0){ %> <% notes.forEach(note => { %>
   <p><%=note.note_description%></p>
   <%});}else{ %>
-    <p>no notes were found.</p>
- <% } %>
+  <p>no notes were found.</p>
+  <% } %>
 </section>
 <%- include('partials/footer') %>

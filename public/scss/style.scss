@@ -75,13 +75,14 @@ main {
 .book {
   border-top: 2px solid #ccc;
   padding-top: 2rem;
-  padding-bottom: 6rem;
+  padding-bottom: 4rem;
 
   img {
     width: 150px;
     height: 250px;
     float: left;
     margin-right: 2rem;
+    margin-bottom: 1rem;
     background-color: #ccc;
   }
 
@@ -92,6 +93,9 @@ main {
   small {
     color: $rating-color;
     font-size: 1rem;
+  }
+  .review{
+    margin: 1rem 0;
   }
 
   .notes {
@@ -113,6 +117,9 @@ main {
     font-size: 2.5rem;
     color: $primary-color;
   }
+  p{
+    clear: both;
+  }
   small {
     color: $rating-color;
     font-size: 1rem;
@@ -128,5 +135,24 @@ main {
 
   .notes {
     font-size: 2rem;
+  }
+}
+
+.edit-review{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  gap: 1rem;
+
+  label{
+    color: $rating-color;
+  }
+  button{
+    align-self: center;
+    padding: 1rem;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
   }
 }
