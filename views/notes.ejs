@@ -15,10 +15,14 @@
       <button type="submit">Edit Review</button>
     </div>
   </form>
-  <hr>
+  <hr />
   <h2>My Notes</h2>
   <% if(locals.notes.length > 0){ %> <% notes.forEach(note => { %>
-  <p><%=note.note_description%></p>
+  <form action="/delete" method="post" class="delete-form">
+    <p><%=note.note_description%></p>
+    <button class="delete" type="submit">Delete</button>
+  </form>
+  <hr>
   <%});}else{ %>
   <p>no notes were found.</p>
   <% } %>

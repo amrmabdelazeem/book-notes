@@ -121,8 +121,27 @@ main .addBook textarea {
 #notes strong a {
   color: #fc6736;
 }
-#notes .notes {
-  font-size: 2rem;
+#notes .delete-form {
+  display: flex;
+  flex-direction: column;
+}
+#notes .delete-form .delete {
+  align-self: flex-end;
+  clear: both;
+  background-color: #fc6736;
+  color: #efecec;
+  font-family: sans-serif;
+  border-radius: 5px;
+  border: none;
+  padding: 0.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+#notes .delete-form .delete:hover {
+  transform: scale(1.1);
+  background-color: #fd8d68;
+  color: #fff;
 }
 
 .edit-review {
