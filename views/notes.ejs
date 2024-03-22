@@ -8,7 +8,7 @@
     <small>ISBN: <span><%=selectedBook.isbn%></span></small><br />
     <small>Date read: <span> <%=selectedBook.date_read%></span></small><br />
     <small>How strongly I recommend it: <span><%=selectedBook.rating%></span>/10</small><br /><br />
-    <strong>(See <a href="/">my list of all books</a>, for more.)</strong>
+    <strong>(See <a href="/">my list of all books</a>, for more. Or <a target="_blank" href="https://openlibrary.org/isbn/<%= selectedBook.isbn %>">Visit book page</a> )</strong>
     <div class="review">
       <p><%= selectedBook.review %></p>
       <br />
