@@ -1,0 +1,12 @@
+@import "vars";
+* {
+    box-sizing: border-box;
+    font-family: "Valkyrie C4";
+  }
+  html {
+    background-color: $background-color;
+  }
+  body {
+    max-width: 800px;
+    margin: 0 auto;
+  }

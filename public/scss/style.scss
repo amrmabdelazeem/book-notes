@@ -1,22 +1,5 @@
-//Variables
-$primary-color: #080;
-$secondary-color: #31363f;
-$parahraph-color: #222831;
-$rating-color: #efecec;
-$background-color: #76abae;
-$header-color: #eeeeee;
+@import "utils", "vars";
 
-* {
-  box-sizing: border-box;
-  font-family: "Valkyrie C4";
-}
-html {
-  background-color: $background-color;
-}
-body {
-  max-width: 800px;
-  margin: 0 auto;
-}
 main {
   :is(h1, h2) {
     color: $primary-color;
