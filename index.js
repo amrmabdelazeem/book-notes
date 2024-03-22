@@ -100,22 +100,22 @@ let books = [];
 
 let notes = [];
 
-const bookCover = "/images/book-cover.webp";
-// async function getBookCover(booksList) {
-//   const requests = booksList.map((book, index) => {
-//     const url = apiURL + "isbn/" + book.isbn + "-M.jpg";
-//     return axios.get(url);
-//   });
+// const bookCover = "/images/book-cover.webp";
+async function getBookCover(booksList) {
+  const requests = booksList.map((book, index) => {
+    const url = apiURL + "isbn/" + book.isbn + "-M.jpg";
+    return axios.get(url);
+  });
 
-//   try {
-//     const responses = await Promise.all(requests);
-//     const covers = responses.map((response) => response.config.url);
-//     return covers;
-//   } catch (error) {
-//     console.log(`Error fetching book covers: ${error.message}`);
-//     return [];
-//   }
-// }
+  try {
+    const responses = await Promise.all(requests);
+    const covers = responses.map((response) => response.config.url);
+    return covers;
+  } catch (error) {
+    console.log(`Error fetching book covers: ${error.message}`);
+    return [];
+  }
+}
 
 let sortType = "id";
 // Prevent sql injection into the DB
@@ -136,9 +136,9 @@ app.get("/", async (req, res) => {
     const result = await db.query(sql);
     books = result.rows;
 
-    // const bookCovers = await getBookCover(books);
+    const bookCovers = await getBookCover(books);
 
-    res.render("index.ejs", { books, bookCover, shortenBookTitle });
+    res.render("index.ejs", { books, bookCovers, shortenBookTitle });
   } catch (error) {
     console.log(error);
   }
@@ -179,9 +179,9 @@ app.get("/:name", async (req, res) => {
       const selectedBook = pBooksResult.rows[0];
       const currentBookId = selectedBook.id;
 
-      // const bookCovers = await getBookCover(books);
+      const bookCovers = await getBookCover(books);
       // console.log(bookCovers);
-      // const bookCover = bookCovers[currentBookId - 1];
+      const bookCover = bookCovers[currentBookId - 1];
       // console.log(currentBookId);
       // console.log(selectedBook);
       res.render("notes.ejs", { notes, selectedBook, bookCover });
