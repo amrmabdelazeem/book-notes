@@ -129,6 +129,7 @@ function checkSorting(sortCheck) {
     sortType = "id";
   }
 }
+
 //https://covers.openlibrary.org/b/$key/$value-$size.jpg
 app.get("/", async (req, res) => {
   try {
@@ -137,7 +138,6 @@ app.get("/", async (req, res) => {
     books = result.rows;
 
     const bookCovers = await getBookCover(books);
-
     res.render("index.ejs", { books, bookCovers, shortenBookTitle });
   } catch (error) {
     console.log(error);
@@ -180,7 +180,7 @@ app.get("/:name", async (req, res) => {
       const currentBookId = selectedBook.id;
 
       const bookCovers = await getBookCover(books);
-      // console.log(bookCovers);
+      console.log(bookCovers);
       const bookCover = bookCovers[currentBookId - 1];
       // console.log(currentBookId);
       // console.log(selectedBook);
@@ -250,10 +250,11 @@ app.post("/sort", (req, res) => {
 
 app.post("/delete/:id", async (req, res) => {
   const noteId = req.params.id;
+  const route = req.body.route;
 
   try {
     const result = db.query("DELETE FROM notes WHERE notes.note_id = $1", [noteId]);
-    res.redirect("/");
+    res.redirect(`/${route}`);
   } catch (error) {
     console.log(error);
   }
