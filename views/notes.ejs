@@ -5,9 +5,9 @@
     <input type="hidden" name="id" value="<%=selectedBook.id%>" />
     <img src="<%= bookCover %>" alt="Book cover" />
     <h1><%=selectedBook.title%></h1>
-    <small>ISBN: <%=selectedBook.isbn%></small><br />
-    <small>Date read: <%=selectedBook.date_read%></small><br />
-    <small>How strongly I recommend it: <%=selectedBook.rating%>/10</small><br /><br />
+    <small>ISBN: <span><%=selectedBook.isbn%></span></small><br />
+    <small>Date read: <span> <%=selectedBook.date_read%></span></small><br />
+    <small>How strongly I recommend it: <span><%=selectedBook.rating%></span>/10</small><br /><br />
     <strong>(See <a href="/">my list of all books</a>, for more.)</strong>
     <div class="review">
       <p><%= selectedBook.review %></p>

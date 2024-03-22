@@ -39,7 +39,7 @@
   </h2>
     <input type="hidden" name="id" value="<%=book.id%>" />
     <small
-      >Date read: <%= book.date_read %>. How strongly I recommend it:
+      >Date read: <span><%= book.date_read %></span>, How strongly I recommend it:
       <strong><%= book.rating %></strong>/10
     </small>
     <p name="id" value="<%= book.id %>"><%=book.review%></p>
