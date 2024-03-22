@@ -96,47 +96,9 @@ function shortenBookTitle(title) {
   return shortenedTitle;
 }
 
-let books = [
-  {
-    id: 1,
-    title: "1984",
-    rating: 10,
-    review:
-      "This was the book that started my love affair with the dystopian genre. And maybe indirectly influenced my decision to do a politics degree. I was only 12 years old when I first read it but I suddenly saw how politics could be taken and manipulated to tell one hell of a scary and convincing story. I'm a lot more well-read now but, back then, this was a game-changer. I started to think about things differently. I started to think about 2 + 2 = 5 and I wanted to read more books that explored the idea of control.",
-    date_read: "2024-03-01",
-    isbn: 9780452284234,
-  },
-  {
-    id: 2,
-    title: "The Great Gatsby",
-    rating: 9,
-    review:
-      "Fitzgerald can set a scene so perfectly, flawlessly. He paints a world of magic and introduces one of the greatest characters of all time, Jay Gatsby. Gatsby is the embodiment of hope, and no one can dissuade him from his dreams. Have you ever had a dream that carried you to heights you could never have dreamed otherwise? When Gatsby is reunited with Daisy Buchanan, he fills the space to the brim with flowers, creating a living dream. How is anyone supposed to compete with that?",
-    date_read: "2024-03-13",
-    isbn: 1542878160,
-  },
-];
+let books = [];
 
-let notes = [
-  {
-    id: 1,
-    book_id: 1,
-    note_description:
-      "I was within and without, simultaneously enchanted and repelled by the inexhaustible variety of life.",
-  },
-  {
-    id: 2,
-    book_id: 1,
-    note_description:
-      "He smiled understandingly-much more than understandingly. It was one of those rare smiles with a quality of eternal reassurance in it, that you may come across four or five times in life. It faced--or seemed to face--the whole eternal world for an instant, and then concentrated on you with an irresistible prejudice in your favor. It understood you just as far as you wanted to be understood, believed in you as you would like to believe in yourself, and assured you that it had precisely the impression of you that, at your best, you hoped to convey.",
-  },
-  {
-    id: 3,
-    book_id: 2,
-    note_description:
-      "Now I will tell you the answer to my question. It is this. The Party seeks power entirely for its own sake. We are not interested in the good of others; we are interested solely in power, pure power. What pure power means you will understand presently. We are different from the oligarchies of the past in that we know what we are doing. All the others, even those who resembled ourselves, were cowards and hypocrites. The German Nazis and the Russian Communists came very close to us in their methods, but they never had the courage to recognize their own motives.",
-  },
-];
+let notes = [];
 
 const bookCover = "/images/book-cover.webp";
 // async function getBookCover(booksList) {
@@ -290,7 +252,7 @@ app.post("/delete/:id", async (req, res) => {
   const noteId = req.params.id;
 
   try {
-    const result = db.query('DELETE FROM notes WHERE notes.note_id = $1',[noteId]);
+    const result = db.query("DELETE FROM notes WHERE notes.note_id = $1", [noteId]);
     res.redirect("/");
   } catch (error) {
     console.log(error);
