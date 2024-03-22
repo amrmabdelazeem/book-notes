@@ -42,9 +42,24 @@ main a {
 }
 main button {
   cursor: pointer;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 0.2rem;
+  font-family: sans-serif;
+  letter-spacing: 1px;
+  font-size: 1rem;
+  color: #31363f;
 }
-main select {
+main select, main select > * {
   cursor: pointer;
+  padding: 0.5rem;
+  font-family: sans-serif;
+  letter-spacing: 1px;
+  font-size: 1rem;
+  color: #31363f;
+}
+main textarea {
+  background-color: #EEEDED;
 }
 main .forms {
   display: flex;
@@ -58,6 +73,7 @@ main .addBook label {
 }
 main .addBook input {
   margin-bottom: 1rem;
+  background-color: #EEEDED;
 }
 main .addBook input[type=number] {
   -moz-appearance: textfield;
@@ -156,12 +172,10 @@ main .delete-form .delete:hover {
 }
 .edit-review label {
   color: #efecec;
+  font-size: 1.3rem;
 }
 .edit-review button {
   align-self: center;
-  padding: 1rem;
-  border-radius: 10px;
-  font-size: 1.2rem;
 }
 
 /*# sourceMappingURL=style.css.map */

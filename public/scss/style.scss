@@ -27,13 +27,28 @@ main {
     color: $parahraph-color;
   }
   a {
-    color: #080;
+    color: $primary-color;
   }
   button {
     cursor: pointer;
+    padding: .5rem;
+    border: none;
+    border-radius: .2rem;
+    font-family: sans-serif;
+    letter-spacing: 1px;
+    font-size: 1rem;
+    color: $secondary-color;
   }
-  select {
+  select , select > *{
     cursor: pointer;
+    padding: .5rem;
+    font-family: sans-serif;
+    letter-spacing: 1px;
+    font-size: 1rem;
+    color: $secondary-color;
+  }
+  textarea{
+    background-color: $input-bgcolor;
   }
   .forms {
     display: flex;
@@ -48,6 +63,7 @@ main {
     }
     input {
       margin-bottom: 1rem;
+      background-color: $input-bgcolor;
     }
     input[type="number"] {
       &::-webkit-outer-spin-button,
@@ -139,7 +155,7 @@ main {
       font-weight: bold;
       &:hover {
         transform: scale(1.1);
-        background-color: lighten($color: #d71313, $amount: 10%);
+        background-color: lighten($color: $btn-danger, $amount: 10%);
         color: #fff;
       }
     }
@@ -155,11 +171,9 @@ main {
 
   label {
     color: $rating-color;
+    font-size: 1.3rem;
   }
   button {
     align-self: center;
-    padding: 1rem;
-    border-radius: 10px;
-    font-size: 1.2rem;
   }
 }
