@@ -6,7 +6,8 @@ CREATE TABLE books(
 	title VARCHAR(50) NOT NULL,
 	rating INTEGER,
 	date_read DATE NOT NULL,
-	review TEXT
+	review TEXT,
+	route VARCHAR(50) UNIQUE
 );
 
 CREATE TABLE notes(

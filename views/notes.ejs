@@ -4,7 +4,7 @@
   <form action="/edit" method="post">
     <input type="hidden" name="id" value="<%=selectedBook.id%>" />
     <img src="<%= bookCover %>" alt="Book cover" />
-    <h1><%=selectedBook.title%></h1>
+    <h1><%=selectedBook.title%> - BY <%= selectedBook.author %></h1>
     <small>ISBN: <span><%=selectedBook.isbn%></span></small><br />
     <small>Date read: <span> <%=selectedBook.date_read%></span></small><br />
     <small>How strongly I recommend it: <span><%=selectedBook.rating%></span>/10</small><br /><br />
