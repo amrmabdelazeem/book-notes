@@ -28,6 +28,7 @@ These instructions will get you a copy of the project up and running on your loc
 * Express.js
 * PostgreSQL
 * EJS
+* Sass
 * Axios
 * Body-parser
 * Dotenv
@@ -73,6 +74,7 @@ To Be updated more.
 * Body-parser: Middleware for parsing incoming request bodies.
 * Axios: a simple promise based HTTP client for the browser and node.js.
 * Postgresql: open source object-relational database system that has earned it a strong reputation for reliability, feature robustness, and performance. 
+* Dotenv: Loads environment variables from a .env file into process.env.
 
 ## Acknowledgments
 
