@@ -1,15 +1,17 @@
 //Variables
-$primary-color: #ffb0b0;
-$secondary-color: #fc6736;
-$parahraph-color: #ccc;
+$primary-color: #080;
+$secondary-color: #31363f;
+$parahraph-color: #222831;
 $rating-color: #efecec;
+$background-color: #76abae;
+$header-color: #eeeeee;
 
 * {
   box-sizing: border-box;
   font-family: "Valkyrie C4";
 }
 html {
-  background-color: #0c2d57;
+  background-color: $background-color;
 }
 body {
   max-width: 800px;
@@ -22,7 +24,7 @@ main {
   }
   header {
     font-size: 2.5rem;
-    color: #080;
+    color: $header-color;
     margin: 2rem 0;
   }
   h1 {
@@ -44,16 +46,22 @@ main {
   a {
     color: #080;
   }
+  button {
+    cursor: pointer;
+  }
+  select {
+    cursor: pointer;
+  }
   .forms {
     display: flex;
     justify-content: space-between;
   }
   .addBook {
     span {
-      color: #fc6736;
+      color: $secondary-color;
     }
     label {
-      color: #fc6736;
+      color: $secondary-color;
     }
     input {
       margin-bottom: 1rem;
@@ -70,60 +78,60 @@ main {
       margin-bottom: 1rem;
     }
   }
-}
-
-.book {
-  border-top: 2px solid #ccc;
-  padding-top: 2rem;
-  padding-bottom: 4rem;
-
-  img {
-    width: 150px;
-    height: 250px;
-    float: left;
-    margin-right: 2rem;
-    margin-bottom: 1rem;
-    background-color: #ccc;
-  }
-
-  h3 {
-    font-size: 2rem;
-    color: $secondary-color;
-  }
-  small {
-    color: $rating-color;
-    font-size: 1rem;
-  }
-  .review {
-    margin: 1rem 0;
-  }
-
-  .notes {
-    font-size: 2rem;
-  }
-}
-
-#notes {
-  text-transform: uppercase;
-  img {
-    width: 150px;
-    height: auto;
-    float: left;
-    margin-right: 2rem;
-    margin-bottom: 1rem;
-    display: block;
-  }
-  h3 {
-    font-size: 2.5rem;
-    color: $primary-color;
-  }
-  p {
-    clear: both;
-  }
   small {
     color: $rating-color;
     font-size: 1rem;
     line-height: 30px;
+
+    span {
+      color: $secondary-color;
+      font-weight: bold;
+    }
+  }
+
+  .book {
+    border-top: 2px solid #ccc;
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+
+    img {
+      width: 150px;
+      height: 250px;
+      float: left;
+      margin-right: 2rem;
+      margin-bottom: 1rem;
+      background-color: #ccc;
+    }
+    strong {
+      font-size: 1.2rem;
+      color: $secondary-color;
+    }
+    .review {
+      margin: 1rem 0;
+    }
+
+    .notes {
+      font-size: 2rem;
+    }
+  }
+
+  #notes {
+    text-transform: uppercase;
+    img {
+      width: 150px;
+      height: auto;
+      float: left;
+      margin-right: 2rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    h3 {
+      font-size: 2.5rem;
+      color: $primary-color;
+    }
+    p {
+      clear: both;
+    }
   }
   strong {
     color: $rating-color;
@@ -138,7 +146,7 @@ main {
     .delete {
       align-self: flex-end;
       clear: both;
-      background-color: #fc6736;
+      background-color: $secondary-color;
       color: #efecec;
       font-family: sans-serif;
       border-radius: 5px;
@@ -146,10 +154,9 @@ main {
       padding: 0.5rem;
       font-size: 1rem;
       font-weight: bold;
-      cursor: pointer;
       &:hover {
         transform: scale(1.1);
-        background-color: lighten($color: #fc6736, $amount: 10%);
+        background-color: lighten($color: #d71313, $amount: 10%);
         color: #fff;
       }
     }
@@ -171,6 +178,5 @@ main {
     padding: 1rem;
     border-radius: 10px;
     font-size: 1.2rem;
-    cursor: pointer;
   }
 }

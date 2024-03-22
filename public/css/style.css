@@ -4,7 +4,7 @@
 }
 
 html {
-  background-color: #0c2d57;
+  background-color: #76abae;
 }
 
 body {
@@ -13,12 +13,12 @@ body {
 }
 
 main :is(h1, h2) {
-  color: #ffb0b0;
+  color: #080;
   letter-spacing: 2px;
 }
 main header {
   font-size: 2.5rem;
-  color: #080;
+  color: #eeeeee;
   margin: 2rem 0;
 }
 main h1 {
@@ -35,20 +35,26 @@ main h3 {
 }
 main p {
   font-size: 1.5rem;
-  color: #ccc;
+  color: #222831;
 }
 main a {
   color: #080;
+}
+main button {
+  cursor: pointer;
+}
+main select {
+  cursor: pointer;
 }
 main .forms {
   display: flex;
   justify-content: space-between;
 }
 main .addBook span {
-  color: #fc6736;
+  color: #31363f;
 }
 main .addBook label {
-  color: #fc6736;
+  color: #31363f;
 }
 main .addBook input {
   margin-bottom: 1rem;
@@ -63,13 +69,21 @@ main .addBook input[type=number]::-webkit-outer-spin-button, main .addBook input
 main .addBook textarea {
   margin-bottom: 1rem;
 }
-
-.book {
+main small {
+  color: #efecec;
+  font-size: 1rem;
+  line-height: 30px;
+}
+main small span {
+  color: #31363f;
+  font-weight: bold;
+}
+main .book {
   border-top: 2px solid #ccc;
   padding-top: 2rem;
   padding-bottom: 4rem;
 }
-.book img {
+main .book img {
   width: 150px;
   height: 250px;
   float: left;
@@ -77,25 +91,20 @@ main .addBook textarea {
   margin-bottom: 1rem;
   background-color: #ccc;
 }
-.book h3 {
-  font-size: 2rem;
-  color: #fc6736;
+main .book strong {
+  font-size: 1.2rem;
+  color: #31363f;
 }
-.book small {
-  color: #efecec;
-  font-size: 1rem;
-}
-.book .review {
+main .book .review {
   margin: 1rem 0;
 }
-.book .notes {
+main .book .notes {
   font-size: 2rem;
 }
-
-#notes {
+main #notes {
   text-transform: uppercase;
 }
-#notes img {
+main #notes img {
   width: 150px;
   height: auto;
   float: left;
@@ -103,32 +112,27 @@ main .addBook textarea {
   margin-bottom: 1rem;
   display: block;
 }
-#notes h3 {
+main #notes h3 {
   font-size: 2.5rem;
-  color: #ffb0b0;
+  color: #080;
 }
-#notes p {
+main #notes p {
   clear: both;
 }
-#notes small {
-  color: #efecec;
-  font-size: 1rem;
-  line-height: 30px;
-}
-#notes strong {
+main strong {
   color: #efecec;
 }
-#notes strong a {
-  color: #fc6736;
+main strong a {
+  color: #31363f;
 }
-#notes .delete-form {
+main .delete-form {
   display: flex;
   flex-direction: column;
 }
-#notes .delete-form .delete {
+main .delete-form .delete {
   align-self: flex-end;
   clear: both;
-  background-color: #fc6736;
+  background-color: #31363f;
   color: #efecec;
   font-family: sans-serif;
   border-radius: 5px;
@@ -136,11 +140,10 @@ main .addBook textarea {
   padding: 0.5rem;
   font-size: 1rem;
   font-weight: bold;
-  cursor: pointer;
 }
-#notes .delete-form .delete:hover {
+main .delete-form .delete:hover {
   transform: scale(1.1);
-  background-color: #fd8d68;
+  background-color: #ed3030;
   color: #fff;
 }
 
@@ -159,7 +162,6 @@ main .addBook textarea {
   padding: 1rem;
   border-radius: 10px;
   font-size: 1.2rem;
-  cursor: pointer;
 }
 
 /*# sourceMappingURL=style.css.map */
