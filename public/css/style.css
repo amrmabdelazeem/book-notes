@@ -57,6 +57,7 @@ main select, main select > * {
   letter-spacing: 1px;
   font-size: 1rem;
   color: #31363f;
+  opacity: 1;
 }
 main textarea {
   background-color: #EEEDED;
