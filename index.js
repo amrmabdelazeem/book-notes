@@ -195,15 +195,15 @@ app.get("/:name", async (req, res) => {
 });
 
 app.post("/add", async (req, res) => {
-  const { title, date_read, review } = req.body;
+  const { title,author, date_read, review } = req.body;
   const isbn = Number(req.body.isbn);
   const rating = parseInt(req.body.rating);
   const route = shortenBookTitle(title);
 
   try {
     await db.query(
-      "INSERT INTO books (title, isbn, rating, date_read, review, route) VALUES($1, $2, $3, $4, $5, $6)",
-      [title, isbn, rating, date_read, review, route]
+      "INSERT INTO books (title,author , isbn, rating, date_read, review, route) VALUES($1, $2, $3, $4, $5, $6, $7)",
+      [title,author, isbn, rating, date_read, review, route]
     );
 
     res.redirect("/");
