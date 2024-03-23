@@ -1,8 +1,9 @@
 # Personal Books Management System
 
-This is a simple Library Management System built using Node.js, Express.js, EJS, and PostgreSQL. It allows users to add, edit, delete, and view books in his library.
+This is a simple Library Management System built using Node.js, Express.js, EJS, and PostgreSQL. It allows users to add, edit, delete, and view books in 
+his library; This project is a web application that allows users to manage their personal books collection. It was built usingThis project is a web application that allows users to keep up with their own personal books, reviews and notes.
 
-# Table of Contents
+## Table of Contents
 
 * [Getting Started](#getting-started)
 * [Features](#features)
@@ -11,18 +12,24 @@ This is a simple Library Management System built using Node.js, Express.js, EJS,
 * [Usage Instructions](#usage-instructions)
 * [Contributing](#CONTRIBUTING)
 
-# Getting Started
+## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes:
 
-# Features
+1. Clone this repository to your local machine.
+2. Create a new PostgreSQL database and update the .env file with the correctcredentials.
+3. Run npm install to install the necessary dependencies.
+4. Run npm start to start the application.
+5. Open your web browser and navigate to http://localhost:3000 to view the todo list.
+
+## Features
 
 * Add new books to the library
 * Edit existing books in the library
 * Delete books from the library
 * View books in the library
 
-# Tech Stack
+## Tech Stack
 
 * Node.js
 * Express.js
@@ -33,7 +40,7 @@ These instructions will get you a copy of the project up and running on your loc
 * Body-parser
 * Dotenv
 
-# Installation
+## Installation
 1. Clone the repository
 
 ```bash
@@ -61,13 +68,6 @@ API_URL=<api_url>
 npm start
 ```
 
-# Usage
-
-Visit http://localhost:3000 to view the application.
-
-
-To Be updated more.
-
 ## Dependancies
 * Express: A minimal and flexible Node.js web application framework.
 * EJS: Embedded JavaScript templates for rendering dynamic content.
@@ -75,6 +75,20 @@ To Be updated more.
 * Axios: a simple promise based HTTP client for the browser and node.js.
 * Postgresql: open source object-relational database system that has earned it a strong reputation for reliability, feature robustness, and performance. 
 * Dotenv: Loads environment variables from a .env file into process.env.
+
+# Project Preview
+
+![Main](public/screenshots/Main.png)
+----
+![Sort](<public/screenshots/Sort.png>)
+----
+![Book Page](<public/screenshots/BookPage.png>)
+----
+![Add New Book](<public/screenshots/AddBook.png>)
+----
+![Edit Review](<public/screenshots/EditReview.png>)
+----
+![Preview](<public/screenshots/Preview.png>)
 
 ## Acknowledgments
 
