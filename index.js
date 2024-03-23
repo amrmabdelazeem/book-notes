@@ -160,7 +160,7 @@ app.get("/", async (req, res) => {
 //   res.render("notes.ejs",{notes,bookCover ,selectedBook});
 // });
 
-app.get("/:name", async (req, res) => {
+app.get("/book/:name", async (req, res) => {
   const paramName = req.params.name;
   if (paramName !== "add" && paramName !== "edit") {
     try {
