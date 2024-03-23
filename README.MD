@@ -9,8 +9,9 @@ his library; This project is a web application that allows users to manage their
 * [Features](#features)
 * [Tech Stack](#tech-stack)
 * [Installation](#installation)
-* [Usage Instructions](#usage-instructions)
-* [Contributing](#CONTRIBUTING)
+* [Dependancies](#Dependancies)
+* [Project Preview](#Project-Preview)
+*[Acknowledgments](#Acknowledgments)
 
 ## Getting Started
 
@@ -76,7 +77,7 @@ npm start
 * Postgresql: open source object-relational database system that has earned it a strong reputation for reliability, feature robustness, and performance. 
 * Dotenv: Loads environment variables from a .env file into process.env.
 
-# Project Preview
+## Project Preview
 
 ![Main](public/screenshots/Main.png)
 ----
