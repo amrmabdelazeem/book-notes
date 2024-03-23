@@ -79,17 +79,17 @@ npm start
 
 ## Project Preview
 
-![Main](public/screenshots/Main.png)
+![Main](public/images/screenshots/Main.png)
 ----
-![Sort](<public/screenshots/Sort.png>)
+![Sort](<public/images/screenshots/Sort.png>)
 ----
-![Book Page](<public/screenshots/BookPage.png>)
+![Book Page](<public/images/screenshots/BookPage.png>)
 ----
-![Add New Book](<public/screenshots/AddBook.png>)
+![Add New Book](<public/images/screenshots/AddBook.png>)
 ----
-![Edit Review](<public/screenshots/EditReview.png>)
+![Edit Review](<public/images/screenshots/EditReview.png>)
 ----
-![Preview](<public/screenshots/Preview.png>)
+![Preview](<public/images/screenshots/Preview.png>)
 
 ## Acknowledgments
 
