@@ -18,8 +18,9 @@ const db = new pg.Client({
 
 db.connect();
 
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.use(bodyParser.urlencoded({ extended: true }));
+
 
 function shortenBookTitle(title) {
   // Split the title into an array of words
@@ -195,7 +196,7 @@ app.get("/book/:name", async (req, res) => {
 });
 
 app.post("/add", async (req, res) => {
-  const { title,author, date_read, review } = req.body;
+  const { title, author, date_read, review } = req.body;
   const isbn = Number(req.body.isbn);
   const rating = parseInt(req.body.rating);
   const route = shortenBookTitle(title);
@@ -203,7 +204,7 @@ app.post("/add", async (req, res) => {
   try {
     await db.query(
       "INSERT INTO books (title,author , isbn, rating, date_read, review, route) VALUES($1, $2, $3, $4, $5, $6, $7)",
-      [title,author, isbn, rating, date_read, review, route]
+      [title, author, isbn, rating, date_read, review, route]
     );
 
     res.redirect("/");
@@ -215,11 +216,14 @@ app.post("/add", async (req, res) => {
 
 app.post("/edit", async (req, res) => {
   const reviewId = req.body.id;
+  try {
+    const result = await db.query("SELECT review FROM BOOKS WHERE books.id = $1", [reviewId]);
+    const oldReview = result.rows[0];
 
-  const result = await db.query("SELECT review FROM BOOKS WHERE books.id = $1", [reviewId]);
-  const oldReview = result.rows[0];
-
-  res.render("editReview.ejs", { oldReview, reviewId });
+    res.render("editReview.ejs", { oldReview, reviewId });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 app.post("/submit", async (req, res) => {
