@@ -21,7 +21,6 @@ db.connect();
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
 function shortenBookTitle(title) {
   // Split the title into an array of words
   const words = title.split(" ");
@@ -101,7 +100,8 @@ let books = [];
 
 let notes = [];
 
-// const bookCover = "/images/book-cover.webp";
+// Request book covers from the api
+
 async function getBookCover(booksList) {
   const requests = booksList.map((book, index) => {
     const url = apiURL + "isbn/" + book.isbn + "-M.jpg";
@@ -141,7 +141,7 @@ app.get("/", async (req, res) => {
     const bookCovers = await getBookCover(books);
     res.render("index.ejs", { books, bookCovers, shortenBookTitle });
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
   }
 });
 
@@ -187,12 +187,16 @@ app.get("/book/:name", async (req, res) => {
       // console.log(selectedBook);
       res.render("notes.ejs", { notes, selectedBook, bookCover });
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
       res.redirect("/");
     }
   } else if (paramName === "add") {
     res.render("add.ejs");
   }
+});
+
+app.get("/add", (req, res) => {
+  res.render("add.ejs");
 });
 
 app.post("/add", async (req, res) => {
@@ -209,7 +213,7 @@ app.post("/add", async (req, res) => {
 
     res.redirect("/");
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
     res.render("add.ejs");
   }
 });
@@ -222,7 +226,7 @@ app.post("/edit", async (req, res) => {
 
     res.render("editReview.ejs", { oldReview, reviewId });
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
   }
 });
 
@@ -238,7 +242,7 @@ app.post("/submit", async (req, res) => {
     const currentRoute = result.rows[0].route;
     res.redirect(`/${currentRoute}`);
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
   }
 });
 
@@ -248,7 +252,7 @@ app.post("/sort", (req, res) => {
     checkSorting(sortType);
     res.redirect("/");
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
   }
 });
 
@@ -260,7 +264,7 @@ app.post("/delete/:id", async (req, res) => {
     const result = db.query("DELETE FROM notes WHERE notes.note_id = $1", [noteId]);
     res.redirect(`/${route}`);
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
   }
 });
 // db.end();
