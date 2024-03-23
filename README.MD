@@ -11,7 +11,7 @@ his library; This project is a web application that allows users to manage their
 * [Installation](#installation)
 * [Dependancies](#Dependancies)
 * [Project Preview](#Project-Preview)
-*[Acknowledgments](#Acknowledgments)
+* [Acknowledgments](#Acknowledgments)
 
 ## Getting Started
 
