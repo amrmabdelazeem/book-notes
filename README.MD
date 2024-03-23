@@ -81,7 +81,7 @@ npm start
 
 ![Main](public/images/screenshots/Main.png)
 ----
-![Sort](<public/images/screenshots/Sort.png>)
+![Sort](public/images/screenshots/Sort.png)
 ----
 ![Book Page](<public/images/screenshots/BookPage.png>)
 ----
