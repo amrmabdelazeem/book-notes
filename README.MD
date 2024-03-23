@@ -1,7 +1,7 @@
 # Personal Books Management System
 
 This is a simple Library Management System built using Node.js, Express.js, EJS, and PostgreSQL. It allows users to add, edit, delete, and view books in 
-his library; This project is a web application that allows users to manage their personal books collection. It was built usingThis project is a web application that allows users to keep up with their own personal books, reviews and notes.
+his library; This project is a web application that allows users to manage their personal books collection, keep up with their own personal books, reviews and notes.
 
 ## Table of Contents
 
